@@ -28,7 +28,7 @@ export const Route = createFileRoute("/_app/maquinas/$maquinaId")({
 });
 
 function MaquinaDetalhe() {
-  const { maquina } = Route.useLoaderData();
+  const { maquina } = Route.useLoaderData() as { maquina: import("@/data/types").Maquina };
 
   return (
     <div className="pb-8">

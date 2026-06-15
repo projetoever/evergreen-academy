@@ -18,7 +18,7 @@ export const Route = createFileRoute("/_app/processos/$categoria")({
 });
 
 function ProcessoDetalhe() {
-  const { processo } = Route.useLoaderData();
+  const { processo } = Route.useLoaderData() as { processo: import("@/data/types").Processo };
 
   return (
     <div className="pb-6">

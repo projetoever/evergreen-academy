@@ -19,7 +19,7 @@ export const Route = createFileRoute("/_app/aulas/$aulaId")({
 });
 
 function AulaDetalhe() {
-  const { aula } = Route.useLoaderData();
+  const { aula } = Route.useLoaderData() as { aula: import("@/data/types").Aula };
   return (
     <div className="pb-8">
       <PageHeader title={aula.titulo} back="/aulas" />
