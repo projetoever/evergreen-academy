@@ -21,6 +21,7 @@ import { Route as AppProcessosIndexRouteImport } from './routes/_app.processos.i
 import { Route as AppMaquinasIndexRouteImport } from './routes/_app.maquinas.index'
 import { Route as AppAvaliacoesIndexRouteImport } from './routes/_app.avaliacoes.index'
 import { Route as AppAulasIndexRouteImport } from './routes/_app.aulas.index'
+import { Route as AppTrilhasTrilhaIdRouteImport } from './routes/_app.trilhas.$trilhaId'
 import { Route as AppProcessosCategoriaRouteImport } from './routes/_app.processos.$categoria'
 import { Route as AppMaquinasMaquinaIdRouteImport } from './routes/_app.maquinas.$maquinaId'
 import { Route as AppAulasAulaIdRouteImport } from './routes/_app.aulas.$aulaId'
@@ -84,6 +85,11 @@ const AppAulasIndexRoute = AppAulasIndexRouteImport.update({
   path: '/aulas/',
   getParentRoute: () => AppRoute,
 } as any)
+const AppTrilhasTrilhaIdRoute = AppTrilhasTrilhaIdRouteImport.update({
+  id: '/trilhas/$trilhaId',
+  path: '/trilhas/$trilhaId',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppProcessosCategoriaRoute = AppProcessosCategoriaRouteImport.update({
   id: '/processos/$categoria',
   path: '/processos/$categoria',
@@ -111,6 +117,7 @@ export interface FileRoutesByFullPath {
   '/aulas/$aulaId': typeof AppAulasAulaIdRoute
   '/maquinas/$maquinaId': typeof AppMaquinasMaquinaIdRoute
   '/processos/$categoria': typeof AppProcessosCategoriaRoute
+  '/trilhas/$trilhaId': typeof AppTrilhasTrilhaIdRoute
   '/aulas/': typeof AppAulasIndexRoute
   '/avaliacoes/': typeof AppAvaliacoesIndexRoute
   '/maquinas/': typeof AppMaquinasIndexRoute
@@ -127,6 +134,7 @@ export interface FileRoutesByTo {
   '/aulas/$aulaId': typeof AppAulasAulaIdRoute
   '/maquinas/$maquinaId': typeof AppMaquinasMaquinaIdRoute
   '/processos/$categoria': typeof AppProcessosCategoriaRoute
+  '/trilhas/$trilhaId': typeof AppTrilhasTrilhaIdRoute
   '/aulas': typeof AppAulasIndexRoute
   '/avaliacoes': typeof AppAvaliacoesIndexRoute
   '/maquinas': typeof AppMaquinasIndexRoute
@@ -145,6 +153,7 @@ export interface FileRoutesById {
   '/_app/aulas/$aulaId': typeof AppAulasAulaIdRoute
   '/_app/maquinas/$maquinaId': typeof AppMaquinasMaquinaIdRoute
   '/_app/processos/$categoria': typeof AppProcessosCategoriaRoute
+  '/_app/trilhas/$trilhaId': typeof AppTrilhasTrilhaIdRoute
   '/_app/aulas/': typeof AppAulasIndexRoute
   '/_app/avaliacoes/': typeof AppAvaliacoesIndexRoute
   '/_app/maquinas/': typeof AppMaquinasIndexRoute
@@ -163,6 +172,7 @@ export interface FileRouteTypes {
     | '/aulas/$aulaId'
     | '/maquinas/$maquinaId'
     | '/processos/$categoria'
+    | '/trilhas/$trilhaId'
     | '/aulas/'
     | '/avaliacoes/'
     | '/maquinas/'
@@ -179,6 +189,7 @@ export interface FileRouteTypes {
     | '/aulas/$aulaId'
     | '/maquinas/$maquinaId'
     | '/processos/$categoria'
+    | '/trilhas/$trilhaId'
     | '/aulas'
     | '/avaliacoes'
     | '/maquinas'
@@ -196,6 +207,7 @@ export interface FileRouteTypes {
     | '/_app/aulas/$aulaId'
     | '/_app/maquinas/$maquinaId'
     | '/_app/processos/$categoria'
+    | '/_app/trilhas/$trilhaId'
     | '/_app/aulas/'
     | '/_app/avaliacoes/'
     | '/_app/maquinas/'
@@ -293,6 +305,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppAulasIndexRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/trilhas/$trilhaId': {
+      id: '/_app/trilhas/$trilhaId'
+      path: '/trilhas/$trilhaId'
+      fullPath: '/trilhas/$trilhaId'
+      preLoaderRoute: typeof AppTrilhasTrilhaIdRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/processos/$categoria': {
       id: '/_app/processos/$categoria'
       path: '/processos/$categoria'
@@ -327,6 +346,7 @@ interface AppRouteChildren {
   AppAulasAulaIdRoute: typeof AppAulasAulaIdRoute
   AppMaquinasMaquinaIdRoute: typeof AppMaquinasMaquinaIdRoute
   AppProcessosCategoriaRoute: typeof AppProcessosCategoriaRoute
+  AppTrilhasTrilhaIdRoute: typeof AppTrilhasTrilhaIdRoute
   AppAulasIndexRoute: typeof AppAulasIndexRoute
   AppAvaliacoesIndexRoute: typeof AppAvaliacoesIndexRoute
   AppMaquinasIndexRoute: typeof AppMaquinasIndexRoute
@@ -343,6 +363,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppAulasAulaIdRoute: AppAulasAulaIdRoute,
   AppMaquinasMaquinaIdRoute: AppMaquinasMaquinaIdRoute,
   AppProcessosCategoriaRoute: AppProcessosCategoriaRoute,
+  AppTrilhasTrilhaIdRoute: AppTrilhasTrilhaIdRoute,
   AppAulasIndexRoute: AppAulasIndexRoute,
   AppAvaliacoesIndexRoute: AppAvaliacoesIndexRoute,
   AppMaquinasIndexRoute: AppMaquinasIndexRoute,

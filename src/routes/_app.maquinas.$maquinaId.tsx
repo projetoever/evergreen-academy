@@ -32,7 +32,11 @@ function MaquinaDetalhe() {
 
   return (
     <div className="pb-8">
-      <PageHeader title={maquina.nome} subtitle={`${maquina.marca} • ${maquina.produto}`} back="/maquinas" />
+      <PageHeader
+        title={maquina.nome}
+        subtitle={`${maquina.marca} • ${maquina.produto}`}
+        back="/maquinas"
+      />
 
       {/* Foto + QR */}
       <div className="relative mx-4 mt-2 overflow-hidden rounded-2xl">
@@ -52,7 +56,11 @@ function MaquinaDetalhe() {
       {/* Dados */}
       <div className="mx-4 mt-3 grid grid-cols-3 gap-2">
         <DataPill label="Setor" value={maquina.setor} />
-        <DataPill label="Operadores" value={`${maquina.operadoresHabilitados}`} icon={<Users className="h-3.5 w-3.5" />} />
+        <DataPill
+          label="Operadores"
+          value={`${maquina.operadoresHabilitados}`}
+          icon={<Users className="h-3.5 w-3.5" />}
+        />
         <DataPill label="Módulos" value={`${maquina.modulos.length}`} />
       </div>
 
@@ -60,7 +68,8 @@ function MaquinaDetalhe() {
       <div className="mx-4 mt-3 flex items-start gap-2 rounded-xl border border-dashed border-primary/30 bg-primary/5 p-3">
         <Info className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
         <p className="text-[11px] leading-relaxed text-foreground">
-          Cada máquina tem um QR fixo. Em breve, escanear <b>{maquina.qrCode}</b> abrirá esta tela direto no celular.
+          Cada máquina tem um QR fixo. Em breve, escanear <b>{maquina.qrCode}</b> abrirá esta tela
+          direto no celular.
         </p>
       </div>
 
@@ -68,19 +77,35 @@ function MaquinaDetalhe() {
       <Tabs defaultValue="treino" className="mt-4">
         <div className="px-4">
           <TabsList className="grid w-full grid-cols-5 rounded-xl bg-muted p-1">
-            <TabsTrigger value="treino" className="text-[11px]"><PlayCircle className="mr-1 h-3.5 w-3.5" />Treino</TabsTrigger>
-            <TabsTrigger value="checklist" className="text-[11px]"><ClipboardCheck className="mr-1 h-3.5 w-3.5" /></TabsTrigger>
-            <TabsTrigger value="alarmes" className="text-[11px]"><AlertOctagon className="mr-1 h-3.5 w-3.5" /></TabsTrigger>
-            <TabsTrigger value="seguranca" className="text-[11px] data-[state=active]:text-danger"><ShieldAlert className="mr-1 h-3.5 w-3.5" /></TabsTrigger>
-            <TabsTrigger value="docs" className="text-[11px]"><FileText className="mr-1 h-3.5 w-3.5" /></TabsTrigger>
+            <TabsTrigger value="treino" className="text-[11px]">
+              <PlayCircle className="mr-1 h-3.5 w-3.5" />
+              Treino
+            </TabsTrigger>
+            <TabsTrigger value="checklist" className="text-[11px]">
+              <ClipboardCheck className="mr-1 h-3.5 w-3.5" />
+            </TabsTrigger>
+            <TabsTrigger value="alarmes" className="text-[11px]">
+              <AlertOctagon className="mr-1 h-3.5 w-3.5" />
+            </TabsTrigger>
+            <TabsTrigger value="seguranca" className="text-[11px] data-[state=active]:text-danger">
+              <ShieldAlert className="mr-1 h-3.5 w-3.5" />
+            </TabsTrigger>
+            <TabsTrigger value="docs" className="text-[11px]">
+              <FileText className="mr-1 h-3.5 w-3.5" />
+            </TabsTrigger>
           </TabsList>
         </div>
 
         <TabsContent value="treino" className="mt-3 px-4">
-          <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Módulos</p>
+          <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+            Módulos
+          </p>
           <ul className="mt-2 space-y-2">
             {maquina.modulos.map((m, i) => (
-              <li key={m} className="flex items-center gap-3 rounded-xl border border-border bg-card p-3">
+              <li
+                key={m}
+                className="flex items-center gap-3 rounded-xl border border-border bg-card p-3"
+              >
                 <span className="grid h-8 w-8 place-items-center rounded-full bg-primary/10 text-xs font-bold text-primary">
                   {i + 1}
                 </span>
@@ -100,7 +125,10 @@ function MaquinaDetalhe() {
           </p>
           <ul className="mt-2 space-y-2">
             {maquina.checklist.map((c) => (
-              <li key={c.id} className="flex items-center gap-3 rounded-xl border border-border bg-card p-3">
+              <li
+                key={c.id}
+                className="flex items-center gap-3 rounded-xl border border-border bg-card p-3"
+              >
                 <span className="h-5 w-5 shrink-0 rounded border-2 border-border" />
                 <span className="text-sm">{c.texto}</span>
               </li>
@@ -154,10 +182,15 @@ function MaquinaDetalhe() {
                 </div>
                 <p className="mt-1 text-xs text-foreground">{p.risco}</p>
                 <div className="mt-2">
-                  <p className="text-[10px] font-bold uppercase tracking-wide text-muted-foreground">EPI</p>
+                  <p className="text-[10px] font-bold uppercase tracking-wide text-muted-foreground">
+                    EPI
+                  </p>
                   <div className="mt-1 flex flex-wrap gap-1">
                     {p.epi.map((e) => (
-                      <span key={e} className="rounded-md bg-card px-2 py-0.5 text-[11px] font-medium">
+                      <span
+                        key={e}
+                        className="rounded-md bg-card px-2 py-0.5 text-[11px] font-medium"
+                      >
                         {e}
                       </span>
                     ))}
@@ -177,11 +210,16 @@ function MaquinaDetalhe() {
           </p>
           <ul className="mt-2 space-y-2">
             {maquina.documentos.map((d) => (
-              <li key={d.id} className="flex items-center gap-3 rounded-xl border border-border bg-card p-3">
+              <li
+                key={d.id}
+                className="flex items-center gap-3 rounded-xl border border-border bg-card p-3"
+              >
                 <FileText className="h-5 w-5 shrink-0 text-primary" />
                 <div className="min-w-0 flex-1">
                   <p className="truncate text-sm font-semibold">{d.titulo}</p>
-                  <p className="text-[10px] uppercase tracking-wide text-muted-foreground">{d.tipo}</p>
+                  <p className="text-[10px] uppercase tracking-wide text-muted-foreground">
+                    {d.tipo}
+                  </p>
                 </div>
               </li>
             ))}
@@ -192,7 +230,15 @@ function MaquinaDetalhe() {
   );
 }
 
-function DataPill({ label, value, icon }: { label: string; value: string; icon?: React.ReactNode }) {
+function DataPill({
+  label,
+  value,
+  icon,
+}: {
+  label: string;
+  value: string;
+  icon?: React.ReactNode;
+}) {
   return (
     <div className="rounded-xl border border-border bg-card p-2 text-center">
       <p className="text-[10px] uppercase tracking-wide text-muted-foreground">{label}</p>

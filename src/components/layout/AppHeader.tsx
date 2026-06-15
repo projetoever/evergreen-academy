@@ -35,7 +35,9 @@ export function AppHeader() {
               {usuario.iniciais}
             </div>
             <div className="hidden min-w-0 sm:block">
-              <p className="truncate text-xs font-semibold leading-tight">{usuario.nome.split(" ")[0]}</p>
+              <p className="truncate text-xs font-semibold leading-tight">
+                {usuario.nome.split(" ")[0]}
+              </p>
               <p className="truncate text-[10px] leading-tight text-muted-foreground">
                 {PAPEL_LABEL[usuario.papel]}
               </p>

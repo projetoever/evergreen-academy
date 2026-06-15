@@ -49,7 +49,9 @@ function MaquinasPage() {
                       {m.marca} • {m.produto}
                     </p>
                   </div>
-                  <span className={`shrink-0 rounded-full px-2 py-0.5 text-[10px] font-semibold ${s.cor}`}>
+                  <span
+                    className={`shrink-0 rounded-full px-2 py-0.5 text-[10px] font-semibold ${s.cor}`}
+                  >
                     {s.label}
                   </span>
                 </div>

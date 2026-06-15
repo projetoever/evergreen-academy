@@ -1,4 +1,3 @@
-
 # Evergreen Academy — Plano de implementação (revisado)
 
 App mobile-first (PWA instalável) em pt-BR, tema "Verde Evergreen" (verde profundo #0B3D2E + acento #10B981, fundo claro #F8FAFC, texto #1F2937). Todos os dados em mocks no frontend, sem Supabase, sem login real, sem backend. Código organizado para futura integração.
@@ -90,7 +89,7 @@ public/
   - "Como aparece na máquina" (bullet visual)
   - "Cuidado" (callout em destaque)
   - Botão grande "Marcar como visto"
-  Linguagem curta, frases de até ~12 palavras, sem jargão técnico sem explicação.
+    Linguagem curta, frases de até ~12 palavras, sem jargão técnico sem explicação.
 - **Processos**: 3 fluxos verticais numerados — fraldas (11), absorventes (11), lenços (11), com as etapas exatas listadas.
 - **Máquinas**: 4 cards (Haina Fralda Baby, Haina Absorvente, Linha Lenços Umedecidos, Italiana Pants) com marca, produto, setor, status de treino, nº operadores habilitados, **QR code** (badge com código curto + ícone), botões Treino/Checklist/Alarmes/Segurança/Docs.
   Detalhe da máquina (tabs):
@@ -99,7 +98,7 @@ public/
   3. **Alarmes** comuns
   4. **Pontos críticos de segurança** — lista de riscos (esmagamento, pontos quentes, lâminas, partes móveis, energia residual) com ícone de alerta, EPI obrigatório e procedimento em caso de incidente. Visual em destaque (vermelho/âmbar) usando `SafetyCallout`.
   5. **Documentos** técnicos
-  Topo da página: foto ilustrativa + dados + `QrBadge` (mostra o código e tem botão "Como escanear" explicando o fluxo futuro).
+     Topo da página: foto ilustrativa + dados + `QrBadge` (mostra o código e tem botão "Como escanear" explicando o fluxo futuro).
 - **QR Code → rota**: `src/routes/m.$codigo.tsx` faz lookup no mock e redireciona via `Navigate` para `/maquinas/$id`. Pronto para um scanner futuro abrir `https://app/m/MQ-001`.
 - **Meus Treinamentos**: tabs por status (Não iniciado, Em andamento, Aguardando avaliação prática, Aprovado, Reciclagem).
 - **Avaliações**: Quiz teórico (perguntas mock), Avaliação prática, Checklist de liberação, Histórico.
@@ -111,6 +110,7 @@ public/
 ## PWA (instalável)
 
 Manifest-only (sem service worker / sem offline):
+
 - `public/manifest.webmanifest`: name "Evergreen Academy", short_name "Evergreen", `display: standalone`, `theme_color: #0B3D2E`, `background_color: #F8FAFC`, ícones 192/512 + maskable.
 - Ícone gerado (logo "EA" sobre verde Evergreen).
 - Tags no `__root.tsx`: `manifest`, `theme-color`, `apple-touch-icon`, viewport com `viewport-fit=cover`.

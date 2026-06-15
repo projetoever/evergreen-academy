@@ -17,10 +17,20 @@ function AvaliacoesPage() {
       <Tabs defaultValue="quiz" className="mt-2">
         <div className="px-4">
           <TabsList className="grid w-full grid-cols-4 rounded-xl bg-muted p-1">
-            <TabsTrigger value="quiz" className="text-[11px]"><BookOpen className="mr-1 h-3.5 w-3.5" />Quiz</TabsTrigger>
-            <TabsTrigger value="pratica" className="text-[11px]"><Award className="mr-1 h-3.5 w-3.5" />Prática</TabsTrigger>
-            <TabsTrigger value="checklist" className="text-[11px]"><ClipboardCheck className="mr-1 h-3.5 w-3.5" /></TabsTrigger>
-            <TabsTrigger value="historico" className="text-[11px]"><History className="mr-1 h-3.5 w-3.5" /></TabsTrigger>
+            <TabsTrigger value="quiz" className="text-[11px]">
+              <BookOpen className="mr-1 h-3.5 w-3.5" />
+              Quiz
+            </TabsTrigger>
+            <TabsTrigger value="pratica" className="text-[11px]">
+              <Award className="mr-1 h-3.5 w-3.5" />
+              Prática
+            </TabsTrigger>
+            <TabsTrigger value="checklist" className="text-[11px]">
+              <ClipboardCheck className="mr-1 h-3.5 w-3.5" />
+            </TabsTrigger>
+            <TabsTrigger value="historico" className="text-[11px]">
+              <History className="mr-1 h-3.5 w-3.5" />
+            </TabsTrigger>
           </TabsList>
         </div>
 
@@ -32,7 +42,8 @@ function AvaliacoesPage() {
           <div className="rounded-2xl border border-border bg-card p-4">
             <p className="text-sm font-bold">Avaliação prática</p>
             <p className="mt-1 text-xs text-muted-foreground">
-              Realizada pelo instrutor diretamente na máquina. Acompanhe o status em "Meus treinamentos".
+              Realizada pelo instrutor diretamente na máquina. Acompanhe o status em "Meus
+              treinamentos".
             </p>
             <ul className="mt-3 space-y-2 text-sm">
               <PraticaItem texto="Identificar EPIs corretos" />

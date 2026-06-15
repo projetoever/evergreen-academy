@@ -83,6 +83,20 @@ export interface Maquina {
   documentos: DocumentoTecnico[];
 }
 
+export type TipoTrilhaEtapa = "teorica" | "checklist" | "quiz" | "pratica" | "liberacao";
+
+export type StatusTrilhaEtapa = "bloqueada" | "disponivel" | "concluida";
+
+export interface TrilhaEtapa {
+  id: string;
+  titulo: string;
+  tipo: TipoTrilhaEtapa;
+  status: StatusTrilhaEtapa;
+  ordem: number;
+  obrigatoria: boolean;
+  referenciaId: string;
+}
+
 export type StatusTrilha =
   | "nao-iniciado"
   | "em-andamento"
@@ -96,6 +110,8 @@ export interface Trilha {
   status: StatusTrilha;
   progresso: number; // 0-100
   ultimaAtualizacao: string;
+  titulo: string;
+  etapas: TrilhaEtapa[];
 }
 
 export interface QuizPergunta {

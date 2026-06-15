@@ -1,10 +1,13 @@
 import { createFileRoute, Navigate } from "@tanstack/react-router";
-import { FUNCIONARIOS_EM_TREINO_MOCK, STATUS_LABEL } from "@/data/mock/treinamentos";
+import { useState } from "react";
+import { STATUS_LABEL } from "@/data/mock/treinamentos";
 import { MAQUINAS_MOCK } from "@/data/mock/maquinas";
 import { PageHeader } from "@/components/common/PageHeader";
 import { Button } from "@/components/ui/button";
 import { usePerfil } from "@/lib/perfilAtual";
 import { Check, X, MessageSquare, KeyRound } from "lucide-react";
+import { loadFuncionariosInstrutor, updateFuncionarioStatus } from "@/lib/trilhasProgress";
+import type { StatusTrilha } from "@/data/types";
 
 export const Route = createFileRoute("/_app/instrutor")({
   component: InstrutorPage,
@@ -12,15 +15,20 @@ export const Route = createFileRoute("/_app/instrutor")({
 
 function InstrutorPage() {
   const { usuario } = usePerfil();
+  const [funcionarios, setFuncionarios] = useState(loadFuncionariosInstrutor);
   if (!["instrutor", "lider", "admin"].includes(usuario.papel)) {
     return <Navigate to="/" replace />;
+  }
+
+  function alterarStatus(funcionarioId: string, status: StatusTrilha, observacao?: string) {
+    setFuncionarios(updateFuncionarioStatus(funcionarioId, status, observacao));
   }
 
   return (
     <div>
       <PageHeader title="Área do instrutor" subtitle="Avalie, aprove e libere operadores" />
       <div className="space-y-3 px-4 py-3">
-        {FUNCIONARIOS_EM_TREINO_MOCK.map((f) => {
+        {funcionarios.map((f) => {
           const maq = MAQUINAS_MOCK.find((m) => m.id === f.maquinaId);
           return (
             <div key={f.id} className="rounded-2xl border border-border bg-card p-3 shadow-sm">
@@ -42,16 +50,54 @@ function InstrutorPage() {
                 </p>
               )}
               <div className="mt-3 grid grid-cols-2 gap-2">
-                <Button size="sm" variant="default" className="h-10 rounded-lg">
+                <Button
+                  size="sm"
+                  variant="default"
+                  className="h-10 rounded-lg"
+                  onClick={() => alterarStatus(f.id, "aguardando-avaliacao")}
+                >
                   <Check className="mr-1 h-4 w-4" /> Aprovar
                 </Button>
-                <Button size="sm" variant="destructive" className="h-10 rounded-lg">
+                <Button
+                  size="sm"
+                  variant="destructive"
+                  className="h-10 rounded-lg"
+                  onClick={() =>
+                    alterarStatus(
+                      f.id,
+                      "reciclagem",
+                      "Reprovado na avaliação prática. Refazer pontos observados.",
+                    )
+                  }
+                >
                   <X className="mr-1 h-4 w-4" /> Reprovar
                 </Button>
-                <Button size="sm" variant="outline" className="h-10 rounded-lg">
+                <Button
+                  size="sm"
+                  variant="outline"
+                  className="h-10 rounded-lg"
+                  onClick={() =>
+                    alterarStatus(
+                      f.id,
+                      f.status,
+                      "Instrutor registrou observação para acompanhamento.",
+                    )
+                  }
+                >
                   <MessageSquare className="mr-1 h-4 w-4" /> Observar
                 </Button>
-                <Button size="sm" variant="outline" className="h-10 rounded-lg">
+                <Button
+                  size="sm"
+                  variant="outline"
+                  className="h-10 rounded-lg"
+                  onClick={() =>
+                    alterarStatus(
+                      f.id,
+                      "aprovado",
+                      "Operador liberado para operação assistida/final.",
+                    )
+                  }
+                >
                   <KeyRound className="mr-1 h-4 w-4" /> Liberar
                 </Button>
               </div>

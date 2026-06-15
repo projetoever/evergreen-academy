@@ -73,7 +73,9 @@ function PerfilPage() {
       {/* Treinamentos pendentes */}
       <section className="mx-4 mt-3 rounded-2xl border border-border bg-card p-4">
         <p className="text-sm font-bold">Treinamentos pendentes</p>
-        <p className="mt-1 text-xs text-muted-foreground">{pendentes.length} em andamento ou aguardando</p>
+        <p className="mt-1 text-xs text-muted-foreground">
+          {pendentes.length} em andamento ou aguardando
+        </p>
       </section>
 
       {/* Certificações */}

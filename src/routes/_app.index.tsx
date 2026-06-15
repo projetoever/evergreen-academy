@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { usePerfil } from "@/lib/perfilAtual";
 import { PAPEL_LABEL } from "@/data/mock/perfis";
 import { TRILHAS_MOCK } from "@/data/mock/treinamentos";
+import { getProgressoTrilha, getStatusTrilha } from "@/lib/trilhasProgress";
 import { MAQUINAS_MOCK } from "@/data/mock/maquinas";
 import {
   GraduationCap,
@@ -20,17 +21,53 @@ export const Route = createFileRoute("/_app/")({
 });
 
 const cards = [
-  { to: "/aulas", titulo: "Conceitos básicos", desc: "Aulas curtas e visuais", icon: GraduationCap, cor: "bg-primary text-primary-foreground" },
-  { to: "/processos", titulo: "Processos", desc: "Como o produto é feito", icon: Workflow, cor: "bg-accent text-accent-foreground" },
-  { to: "/maquinas", titulo: "Máquinas", desc: "Treino por equipamento", icon: Factory, cor: "bg-chart-3/20 text-foreground" },
-  { to: "/meus-treinamentos", titulo: "Meus treinamentos", desc: "Suas trilhas", icon: ListChecks, cor: "bg-secondary text-secondary-foreground" },
-  { to: "/biblioteca", titulo: "Biblioteca técnica", desc: "Manuais e vídeos", icon: Library, cor: "bg-warning/30 text-foreground" },
-  { to: "/avaliacoes", titulo: "Avaliações", desc: "Quiz e prática", icon: ClipboardCheck, cor: "bg-success/20 text-foreground" },
+  {
+    to: "/aulas",
+    titulo: "Conceitos básicos",
+    desc: "Aulas curtas e visuais",
+    icon: GraduationCap,
+    cor: "bg-primary text-primary-foreground",
+  },
+  {
+    to: "/processos",
+    titulo: "Processos",
+    desc: "Como o produto é feito",
+    icon: Workflow,
+    cor: "bg-accent text-accent-foreground",
+  },
+  {
+    to: "/maquinas",
+    titulo: "Máquinas",
+    desc: "Treino por equipamento",
+    icon: Factory,
+    cor: "bg-chart-3/20 text-foreground",
+  },
+  {
+    to: "/meus-treinamentos",
+    titulo: "Meus treinamentos",
+    desc: "Suas trilhas",
+    icon: ListChecks,
+    cor: "bg-secondary text-secondary-foreground",
+  },
+  {
+    to: "/biblioteca",
+    titulo: "Biblioteca técnica",
+    desc: "Manuais e vídeos",
+    icon: Library,
+    cor: "bg-warning/30 text-foreground",
+  },
+  {
+    to: "/avaliacoes",
+    titulo: "Avaliações",
+    desc: "Quiz e prática",
+    icon: ClipboardCheck,
+    cor: "bg-success/20 text-foreground",
+  },
 ] as const;
 
 function HomePage() {
   const { usuario } = usePerfil();
-  const emAndamento = TRILHAS_MOCK.find((t) => t.status === "em-andamento");
+  const emAndamento = TRILHAS_MOCK.find((t) => getStatusTrilha(t, t.etapas) === "em-andamento");
   const maquinaEmAndamento = emAndamento
     ? MAQUINAS_MOCK.find((m) => m.id === emAndamento.maquinaId)
     : undefined;
@@ -43,8 +80,12 @@ function HomePage() {
     <div className="pb-4">
       {/* Saudação */}
       <section className="bg-gradient-to-br from-primary to-primary/80 px-5 pt-5 pb-7 text-primary-foreground">
-        <p className="text-xs opacity-80">{PAPEL_LABEL[usuario.papel]} • {usuario.setor}</p>
-        <h1 className="mt-1 text-2xl font-bold leading-tight">Olá, {usuario.nome.split(" ")[0]} 👋</h1>
+        <p className="text-xs opacity-80">
+          {PAPEL_LABEL[usuario.papel]} • {usuario.setor}
+        </p>
+        <h1 className="mt-1 text-2xl font-bold leading-tight">
+          Olá, {usuario.nome.split(" ")[0]} 👋
+        </h1>
         <p className="mt-1 text-sm opacity-90">Pronto para aprender hoje?</p>
       </section>
 
@@ -52,8 +93,8 @@ function HomePage() {
       {maquinaEmAndamento && emAndamento && (
         <div className="-mt-5 px-4">
           <Link
-            to="/maquinas/$maquinaId"
-            params={{ maquinaId: maquinaEmAndamento.id }}
+            to="/trilhas/$trilhaId"
+            params={{ trilhaId: emAndamento.id }}
             className="flex items-center gap-3 rounded-2xl border border-border bg-card p-3 shadow-sm transition active:scale-[0.99]"
           >
             <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-accent/20 text-accent-foreground">
@@ -63,11 +104,11 @@ function HomePage() {
               <p className="text-[11px] font-semibold uppercase tracking-wide text-accent-foreground">
                 Continuar treinamento
               </p>
-              <p className="truncate text-sm font-bold text-foreground">{maquinaEmAndamento.nome}</p>
+              <p className="truncate text-sm font-bold text-foreground">{emAndamento.titulo}</p>
               <div className="mt-1.5 h-1.5 w-full overflow-hidden rounded-full bg-muted">
                 <div
                   className="h-full rounded-full bg-accent"
-                  style={{ width: `${emAndamento.progresso}%` }}
+                  style={{ width: `${getProgressoTrilha(emAndamento, emAndamento.etapas)}%` }}
                 />
               </div>
             </div>
