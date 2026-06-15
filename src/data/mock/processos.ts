@@ -1,0 +1,58 @@
+import type { Processo } from "../types";
+
+export const PROCESSOS_MOCK: Processo[] = [
+  {
+    categoria: "fraldas",
+    titulo: "Fraldas",
+    descricao: "Fluxo completo de fabricação de fralda descartável.",
+    etapas: [
+      { numero: 1, titulo: "Alimentação de materiais", descricao: "Bobinas e insumos entram na linha.", icone: "Boxes" },
+      { numero: 2, titulo: "Formação do núcleo absorvente", descricao: "Estrutura que recebe o líquido.", icone: "Layers" },
+      { numero: 3, titulo: "Aplicação de celulose/SAP", descricao: "Mistura que retém o líquido.", icone: "Droplets" },
+      { numero: 4, titulo: "Aplicação de não tecido", descricao: "Camadas externas confortáveis.", icone: "Layers3" },
+      { numero: 5, titulo: "Aplicação de elásticos", descricao: "Pernas e cintura ganham elasticidade.", icone: "Waves" },
+      { numero: 6, titulo: "Aplicação de cola hotmelt", descricao: "Une camadas e elásticos.", icone: "Flame" },
+      { numero: 7, titulo: "Corte", descricao: "Define o tamanho de cada fralda.", icone: "Scissors" },
+      { numero: 8, titulo: "Dobra", descricao: "Fralda é dobrada no formato final.", icone: "FoldHorizontal" },
+      { numero: 9, titulo: "Inspeção", descricao: "Sensores verificam qualidade.", icone: "ScanEye" },
+      { numero: 10, titulo: "Contagem", descricao: "Quantidade por pacote.", icone: "Hash" },
+      { numero: 11, titulo: "Embalagem", descricao: "Pacote final selado.", icone: "Package" },
+    ],
+  },
+  {
+    categoria: "absorventes",
+    titulo: "Absorventes",
+    descricao: "Fluxo de fabricação de absorvente íntimo.",
+    etapas: [
+      { numero: 1, titulo: "Alimentação de materiais", descricao: "Insumos entram pela linha.", icone: "Boxes" },
+      { numero: 2, titulo: "Formação do núcleo", descricao: "Camada absorvente é montada.", icone: "Layers" },
+      { numero: 3, titulo: "Cobertura superior", descricao: "Cover top que toca a pele.", icone: "Layers3" },
+      { numero: 4, titulo: "Filme inferior", descricao: "Barreira que impede vazamento.", icone: "Shield" },
+      { numero: 5, titulo: "Aplicação de cola", descricao: "Une as camadas.", icone: "Flame" },
+      { numero: 6, titulo: "Selagem", descricao: "Fechamento térmico das bordas.", icone: "Sparkles" },
+      { numero: 7, titulo: "Corte", descricao: "Define cada absorvente.", icone: "Scissors" },
+      { numero: 8, titulo: "Dobra", descricao: "Formato final compacto.", icone: "FoldHorizontal" },
+      { numero: 9, titulo: "Envelope individual", descricao: "Cada peça em sua embalagem.", icone: "Mail" },
+      { numero: 10, titulo: "Inspeção", descricao: "Verificação de qualidade.", icone: "ScanEye" },
+      { numero: 11, titulo: "Embalagem", descricao: "Pacote final fechado.", icone: "Package" },
+    ],
+  },
+  {
+    categoria: "lencos",
+    titulo: "Lenços umedecidos",
+    descricao: "Fluxo de fabricação de lenços umedecidos.",
+    etapas: [
+      { numero: 1, titulo: "Desbobinamento do não tecido", descricao: "Bobina é desenrolada na linha.", icone: "RotateCw" },
+      { numero: 2, titulo: "Dobra", descricao: "Tecido é dobrado em camadas.", icone: "FoldHorizontal" },
+      { numero: 3, titulo: "Preparação da solução", descricao: "Mistura líquida controlada.", icone: "FlaskConical" },
+      { numero: 4, titulo: "Umectação", descricao: "Tecido recebe a solução.", icone: "Droplets" },
+      { numero: 5, titulo: "Corte", descricao: "Tamanho exato de cada lenço.", icone: "Scissors" },
+      { numero: 6, titulo: "Empilhamento", descricao: "Lenços empilhados em ordem.", icone: "Layers" },
+      { numero: 7, titulo: "Contagem", descricao: "Quantidade certa por embalagem.", icone: "Hash" },
+      { numero: 8, titulo: "Embalagem", descricao: "Inserção no pacote.", icone: "Package" },
+      { numero: 9, titulo: "Selagem", descricao: "Fecho hermético.", icone: "Sparkles" },
+      { numero: 10, titulo: "Aplicação de tampa", descricao: "Tampa plástica colada.", icone: "Lock" },
+      { numero: 11, titulo: "Inspeção final", descricao: "Conferência antes de paletizar.", icone: "ScanEye" },
+    ],
+  },
+];

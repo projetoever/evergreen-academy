@@ -9,61 +9,352 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
+import { Route as AppRouteImport } from './routes/_app'
+import { Route as AppIndexRouteImport } from './routes/_app.index'
+import { Route as MCodigoRouteImport } from './routes/m.$codigo'
+import { Route as AppPerfilRouteImport } from './routes/_app.perfil'
+import { Route as AppMeusTreinamentosRouteImport } from './routes/_app.meus-treinamentos'
+import { Route as AppInstrutorRouteImport } from './routes/_app.instrutor'
+import { Route as AppGestaoRouteImport } from './routes/_app.gestao'
+import { Route as AppBibliotecaRouteImport } from './routes/_app.biblioteca'
+import { Route as AppProcessosIndexRouteImport } from './routes/_app.processos.index'
+import { Route as AppMaquinasIndexRouteImport } from './routes/_app.maquinas.index'
+import { Route as AppAvaliacoesIndexRouteImport } from './routes/_app.avaliacoes.index'
+import { Route as AppAulasIndexRouteImport } from './routes/_app.aulas.index'
+import { Route as AppProcessosCategoriaRouteImport } from './routes/_app.processos.$categoria'
+import { Route as AppMaquinasMaquinaIdRouteImport } from './routes/_app.maquinas.$maquinaId'
+import { Route as AppAulasAulaIdRouteImport } from './routes/_app.aulas.$aulaId'
 
-const IndexRoute = IndexRouteImport.update({
+const AppRoute = AppRouteImport.update({
+  id: '/_app',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppIndexRoute = AppIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => AppRoute,
+} as any)
+const MCodigoRoute = MCodigoRouteImport.update({
+  id: '/m/$codigo',
+  path: '/m/$codigo',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AppPerfilRoute = AppPerfilRouteImport.update({
+  id: '/perfil',
+  path: '/perfil',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppMeusTreinamentosRoute = AppMeusTreinamentosRouteImport.update({
+  id: '/meus-treinamentos',
+  path: '/meus-treinamentos',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppInstrutorRoute = AppInstrutorRouteImport.update({
+  id: '/instrutor',
+  path: '/instrutor',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppGestaoRoute = AppGestaoRouteImport.update({
+  id: '/gestao',
+  path: '/gestao',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppBibliotecaRoute = AppBibliotecaRouteImport.update({
+  id: '/biblioteca',
+  path: '/biblioteca',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppProcessosIndexRoute = AppProcessosIndexRouteImport.update({
+  id: '/processos/',
+  path: '/processos/',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppMaquinasIndexRoute = AppMaquinasIndexRouteImport.update({
+  id: '/maquinas/',
+  path: '/maquinas/',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAvaliacoesIndexRoute = AppAvaliacoesIndexRouteImport.update({
+  id: '/avaliacoes/',
+  path: '/avaliacoes/',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAulasIndexRoute = AppAulasIndexRouteImport.update({
+  id: '/aulas/',
+  path: '/aulas/',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppProcessosCategoriaRoute = AppProcessosCategoriaRouteImport.update({
+  id: '/processos/$categoria',
+  path: '/processos/$categoria',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppMaquinasMaquinaIdRoute = AppMaquinasMaquinaIdRouteImport.update({
+  id: '/maquinas/$maquinaId',
+  path: '/maquinas/$maquinaId',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAulasAulaIdRoute = AppAulasAulaIdRouteImport.update({
+  id: '/aulas/$aulaId',
+  path: '/aulas/$aulaId',
+  getParentRoute: () => AppRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
+  '/': typeof AppIndexRoute
+  '/biblioteca': typeof AppBibliotecaRoute
+  '/gestao': typeof AppGestaoRoute
+  '/instrutor': typeof AppInstrutorRoute
+  '/meus-treinamentos': typeof AppMeusTreinamentosRoute
+  '/perfil': typeof AppPerfilRoute
+  '/m/$codigo': typeof MCodigoRoute
+  '/aulas/$aulaId': typeof AppAulasAulaIdRoute
+  '/maquinas/$maquinaId': typeof AppMaquinasMaquinaIdRoute
+  '/processos/$categoria': typeof AppProcessosCategoriaRoute
+  '/aulas/': typeof AppAulasIndexRoute
+  '/avaliacoes/': typeof AppAvaliacoesIndexRoute
+  '/maquinas/': typeof AppMaquinasIndexRoute
+  '/processos/': typeof AppProcessosIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
+  '/biblioteca': typeof AppBibliotecaRoute
+  '/gestao': typeof AppGestaoRoute
+  '/instrutor': typeof AppInstrutorRoute
+  '/meus-treinamentos': typeof AppMeusTreinamentosRoute
+  '/perfil': typeof AppPerfilRoute
+  '/m/$codigo': typeof MCodigoRoute
+  '/': typeof AppIndexRoute
+  '/aulas/$aulaId': typeof AppAulasAulaIdRoute
+  '/maquinas/$maquinaId': typeof AppMaquinasMaquinaIdRoute
+  '/processos/$categoria': typeof AppProcessosCategoriaRoute
+  '/aulas': typeof AppAulasIndexRoute
+  '/avaliacoes': typeof AppAvaliacoesIndexRoute
+  '/maquinas': typeof AppMaquinasIndexRoute
+  '/processos': typeof AppProcessosIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
+  '/_app': typeof AppRouteWithChildren
+  '/_app/biblioteca': typeof AppBibliotecaRoute
+  '/_app/gestao': typeof AppGestaoRoute
+  '/_app/instrutor': typeof AppInstrutorRoute
+  '/_app/meus-treinamentos': typeof AppMeusTreinamentosRoute
+  '/_app/perfil': typeof AppPerfilRoute
+  '/m/$codigo': typeof MCodigoRoute
+  '/_app/': typeof AppIndexRoute
+  '/_app/aulas/$aulaId': typeof AppAulasAulaIdRoute
+  '/_app/maquinas/$maquinaId': typeof AppMaquinasMaquinaIdRoute
+  '/_app/processos/$categoria': typeof AppProcessosCategoriaRoute
+  '/_app/aulas/': typeof AppAulasIndexRoute
+  '/_app/avaliacoes/': typeof AppAvaliacoesIndexRoute
+  '/_app/maquinas/': typeof AppMaquinasIndexRoute
+  '/_app/processos/': typeof AppProcessosIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/biblioteca'
+    | '/gestao'
+    | '/instrutor'
+    | '/meus-treinamentos'
+    | '/perfil'
+    | '/m/$codigo'
+    | '/aulas/$aulaId'
+    | '/maquinas/$maquinaId'
+    | '/processos/$categoria'
+    | '/aulas/'
+    | '/avaliacoes/'
+    | '/maquinas/'
+    | '/processos/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/biblioteca'
+    | '/gestao'
+    | '/instrutor'
+    | '/meus-treinamentos'
+    | '/perfil'
+    | '/m/$codigo'
+    | '/'
+    | '/aulas/$aulaId'
+    | '/maquinas/$maquinaId'
+    | '/processos/$categoria'
+    | '/aulas'
+    | '/avaliacoes'
+    | '/maquinas'
+    | '/processos'
+  id:
+    | '__root__'
+    | '/_app'
+    | '/_app/biblioteca'
+    | '/_app/gestao'
+    | '/_app/instrutor'
+    | '/_app/meus-treinamentos'
+    | '/_app/perfil'
+    | '/m/$codigo'
+    | '/_app/'
+    | '/_app/aulas/$aulaId'
+    | '/_app/maquinas/$maquinaId'
+    | '/_app/processos/$categoria'
+    | '/_app/aulas/'
+    | '/_app/avaliacoes/'
+    | '/_app/maquinas/'
+    | '/_app/processos/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
+  AppRoute: typeof AppRouteWithChildren
+  MCodigoRoute: typeof MCodigoRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
+    '/_app': {
+      id: '/_app'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AppRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_app/': {
+      id: '/_app/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+      preLoaderRoute: typeof AppIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/m/$codigo': {
+      id: '/m/$codigo'
+      path: '/m/$codigo'
+      fullPath: '/m/$codigo'
+      preLoaderRoute: typeof MCodigoRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_app/perfil': {
+      id: '/_app/perfil'
+      path: '/perfil'
+      fullPath: '/perfil'
+      preLoaderRoute: typeof AppPerfilRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/meus-treinamentos': {
+      id: '/_app/meus-treinamentos'
+      path: '/meus-treinamentos'
+      fullPath: '/meus-treinamentos'
+      preLoaderRoute: typeof AppMeusTreinamentosRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/instrutor': {
+      id: '/_app/instrutor'
+      path: '/instrutor'
+      fullPath: '/instrutor'
+      preLoaderRoute: typeof AppInstrutorRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/gestao': {
+      id: '/_app/gestao'
+      path: '/gestao'
+      fullPath: '/gestao'
+      preLoaderRoute: typeof AppGestaoRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/biblioteca': {
+      id: '/_app/biblioteca'
+      path: '/biblioteca'
+      fullPath: '/biblioteca'
+      preLoaderRoute: typeof AppBibliotecaRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/processos/': {
+      id: '/_app/processos/'
+      path: '/processos'
+      fullPath: '/processos/'
+      preLoaderRoute: typeof AppProcessosIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/maquinas/': {
+      id: '/_app/maquinas/'
+      path: '/maquinas'
+      fullPath: '/maquinas/'
+      preLoaderRoute: typeof AppMaquinasIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/avaliacoes/': {
+      id: '/_app/avaliacoes/'
+      path: '/avaliacoes'
+      fullPath: '/avaliacoes/'
+      preLoaderRoute: typeof AppAvaliacoesIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/aulas/': {
+      id: '/_app/aulas/'
+      path: '/aulas'
+      fullPath: '/aulas/'
+      preLoaderRoute: typeof AppAulasIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/processos/$categoria': {
+      id: '/_app/processos/$categoria'
+      path: '/processos/$categoria'
+      fullPath: '/processos/$categoria'
+      preLoaderRoute: typeof AppProcessosCategoriaRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/maquinas/$maquinaId': {
+      id: '/_app/maquinas/$maquinaId'
+      path: '/maquinas/$maquinaId'
+      fullPath: '/maquinas/$maquinaId'
+      preLoaderRoute: typeof AppMaquinasMaquinaIdRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/aulas/$aulaId': {
+      id: '/_app/aulas/$aulaId'
+      path: '/aulas/$aulaId'
+      fullPath: '/aulas/$aulaId'
+      preLoaderRoute: typeof AppAulasAulaIdRouteImport
+      parentRoute: typeof AppRoute
     }
   }
 }
 
+interface AppRouteChildren {
+  AppBibliotecaRoute: typeof AppBibliotecaRoute
+  AppGestaoRoute: typeof AppGestaoRoute
+  AppInstrutorRoute: typeof AppInstrutorRoute
+  AppMeusTreinamentosRoute: typeof AppMeusTreinamentosRoute
+  AppPerfilRoute: typeof AppPerfilRoute
+  AppIndexRoute: typeof AppIndexRoute
+  AppAulasAulaIdRoute: typeof AppAulasAulaIdRoute
+  AppMaquinasMaquinaIdRoute: typeof AppMaquinasMaquinaIdRoute
+  AppProcessosCategoriaRoute: typeof AppProcessosCategoriaRoute
+  AppAulasIndexRoute: typeof AppAulasIndexRoute
+  AppAvaliacoesIndexRoute: typeof AppAvaliacoesIndexRoute
+  AppMaquinasIndexRoute: typeof AppMaquinasIndexRoute
+  AppProcessosIndexRoute: typeof AppProcessosIndexRoute
+}
+
+const AppRouteChildren: AppRouteChildren = {
+  AppBibliotecaRoute: AppBibliotecaRoute,
+  AppGestaoRoute: AppGestaoRoute,
+  AppInstrutorRoute: AppInstrutorRoute,
+  AppMeusTreinamentosRoute: AppMeusTreinamentosRoute,
+  AppPerfilRoute: AppPerfilRoute,
+  AppIndexRoute: AppIndexRoute,
+  AppAulasAulaIdRoute: AppAulasAulaIdRoute,
+  AppMaquinasMaquinaIdRoute: AppMaquinasMaquinaIdRoute,
+  AppProcessosCategoriaRoute: AppProcessosCategoriaRoute,
+  AppAulasIndexRoute: AppAulasIndexRoute,
+  AppAvaliacoesIndexRoute: AppAvaliacoesIndexRoute,
+  AppMaquinasIndexRoute: AppMaquinasIndexRoute,
+  AppProcessosIndexRoute: AppProcessosIndexRoute,
+}
+
+const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
+  AppRoute: AppRouteWithChildren,
+  MCodigoRoute: MCodigoRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
