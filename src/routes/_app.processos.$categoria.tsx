@@ -29,7 +29,7 @@ function ProcessoDetalhe() {
         <div className="absolute left-[2.25rem] top-3 bottom-0 w-0.5 bg-border" />
 
         <ol className="space-y-3">
-          {processo.etapas.map((etapa) => (
+          {processo.etapas.map((etapa: import("@/data/types").EtapaProcesso) => (
             <li key={etapa.numero} className="relative flex items-start gap-3">
               <div className="relative z-10 grid h-12 w-12 shrink-0 place-items-center rounded-full border-4 border-background bg-primary text-primary-foreground shadow-sm">
                 <IconLucide name={etapa.icone} className="h-5 w-5" />

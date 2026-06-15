@@ -46,7 +46,7 @@ function AulaDetalhe() {
       {/* Como aparece */}
       <Section icon={<Eye className="h-5 w-5 text-primary" />} title="Como aparece na máquina">
         <ul className="space-y-1.5">
-          {aula.comoApareceNaMaquina.map((item, i) => (
+          {aula.comoApareceNaMaquina.map((item: string, i: number) => (
             <li key={i} className="flex items-start gap-2">
               <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
               <span>{item}</span>
