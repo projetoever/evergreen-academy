@@ -1,10 +1,12 @@
-import { createFileRoute, Navigate } from "@tanstack/react-router";
+import { Link, createFileRoute, Navigate } from "@tanstack/react-router";
 import { usePerfil } from "@/lib/perfilAtual";
 import { PageHeader } from "@/components/common/PageHeader";
 import { MAQUINAS_MOCK } from "@/data/mock/maquinas";
+import { Button } from "@/components/ui/button";
+import { resetDemoData } from "@/lib/trilhasProgress";
 import { AULAS_MOCK } from "@/data/mock/aulas";
 import { PERFIS_MOCK, PAPEL_LABEL } from "@/data/mock/perfis";
-import { Factory, GraduationCap, Users } from "lucide-react";
+import { Factory, GraduationCap, RotateCcw, Table2, Users } from "lucide-react";
 
 export const Route = createFileRoute("/_app/gestao")({
   component: GestaoPage,
@@ -17,6 +19,43 @@ function GestaoPage() {
   return (
     <div>
       <PageHeader title="Gestão" subtitle="Conteúdo e usuários (mock)" />
+
+      <section className="mx-4 mt-3 rounded-2xl border border-border bg-card p-4">
+        <div className="flex items-center gap-2">
+          <div className="grid h-8 w-8 place-items-center rounded-lg bg-primary/10 text-primary">
+            <Table2 className="h-4 w-4" />
+          </div>
+          <p className="text-sm font-bold">Matriz de competência</p>
+        </div>
+        <p className="mt-2 text-xs text-muted-foreground">
+          Acompanhe status, nível e próxima ação por funcionário.
+        </p>
+        <Button asChild className="mt-3 h-10 w-full rounded-xl">
+          <Link to="/matriz-competencia">Abrir matriz</Link>
+        </Button>
+      </section>
+
+      <section className="mx-4 mt-3 rounded-2xl border border-danger/30 bg-danger/10 p-4">
+        <div className="flex items-center gap-2">
+          <RotateCcw className="h-4 w-4" />
+          <p className="text-sm font-bold">Resetar progresso de demonstração</p>
+        </div>
+        <p className="mt-2 text-xs text-muted-foreground">
+          Limpa dados locais de trilhas, quiz, checklist e instrutor.
+        </p>
+        <Button
+          variant="destructive"
+          className="mt-3 h-10 w-full rounded-xl"
+          onClick={() => {
+            if (window.confirm("Resetar progresso de demonstração?")) {
+              resetDemoData();
+              window.location.reload();
+            }
+          }}
+        >
+          Resetar progresso de demonstração
+        </Button>
+      </section>
 
       <Stat icon={<Factory className="h-4 w-4" />} titulo="Máquinas" total={MAQUINAS_MOCK.length}>
         <ul className="mt-2 space-y-1 text-sm">

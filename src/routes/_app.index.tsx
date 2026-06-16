@@ -14,6 +14,7 @@ import {
   ShieldCheck,
   Settings2,
   PlayCircle,
+  Table2,
 } from "lucide-react";
 
 export const Route = createFileRoute("/_app/")({
@@ -159,6 +160,21 @@ function HomePage() {
             <div>
               <p className="text-sm font-bold leading-tight">Área do instrutor</p>
               <p className="mt-0.5 text-[11px] text-muted-foreground">Avaliar e liberar</p>
+            </div>
+          </Link>
+        )}
+
+        {isLider && (
+          <Link
+            to="/matriz-competencia"
+            className="flex h-32 flex-col justify-between rounded-2xl border border-success/30 bg-success/10 p-3 shadow-sm transition active:scale-[0.98]"
+          >
+            <span className="grid h-10 w-10 place-items-center rounded-xl bg-success text-success-foreground">
+              <Table2 className="h-5 w-5" />
+            </span>
+            <div>
+              <p className="text-sm font-bold leading-tight">Matriz de competência</p>
+              <p className="mt-0.5 text-[11px] text-muted-foreground">Status por operador</p>
             </div>
           </Link>
         )}

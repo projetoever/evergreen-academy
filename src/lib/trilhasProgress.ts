@@ -3,21 +3,39 @@ import type { FuncionarioEmTreino, StatusTrilha, Trilha, TrilhaEtapa } from "@/d
 
 const PROGRESS_KEY = "evergreen.trilhas.progress.v1";
 const FUNCIONARIOS_KEY = "evergreen.instrutor.funcionarios.v1";
+const CHECKLIST_KEY = "evergreen.trilhas.checklist.v1";
+const INSTRUTOR_CHECKLIST_KEY = "evergreen.instrutor.avaliacao.v1";
+
+export const CHECKLIST_PARTIDA_ITEMS = [
+  "Conferir EPIs obrigatórios.",
+  "Verificar proteção e portas de segurança.",
+  "Conferir bobinas principais.",
+  "Conferir pressão de ar.",
+  "Conferir temperatura do hotmelt.",
+  "Conferir ausência de ferramentas soltas.",
+  "Confirmar área limpa e segura.",
+  "Chamar instrutor antes da primeira partida.",
+];
+
+export const AVALIACAO_PRATICA_ITEMS = [
+  "Identifica EPIs obrigatórios.",
+  "Explica parada de emergência.",
+  "Reconhece pontos de esmagamento.",
+  "Executa checklist de partida.",
+  "Interpreta alarme comum.",
+  "Sabe quando chamar manutenção/líder.",
+];
 
 export type EtapaStatusLocal = "pendente" | "concluida";
 
 export interface TrilhaProgressLocal {
   etapas: Record<string, EtapaStatusLocal>;
-  quiz?: {
-    acertos: number;
-    total: number;
-    nota: number;
-    aprovado: boolean;
-  };
+  quiz?: { acertos: number; total: number; nota: number; aprovado: boolean };
   status?: StatusTrilha;
 }
 
 type ProgressMap = Record<string, TrilhaProgressLocal>;
+type ChecklistMap = Record<string, Record<string, boolean>>;
 
 const isBrowser = () => typeof window !== "undefined";
 
@@ -63,13 +81,49 @@ export function saveQuizResultado(
   saveTrilhaProgress(trilhaId, {
     ...current,
     quiz: resultado,
-    etapas: { ...current.etapas, quiz: "concluida" },
+    etapas: { ...current.etapas, quiz: resultado.aprovado ? "concluida" : "pendente" },
   });
+}
+
+export function loadChecklistPartida(trilhaId: string) {
+  return readJson<ChecklistMap>(CHECKLIST_KEY, {})[trilhaId] ?? {};
+}
+
+export function toggleChecklistPartida(trilhaId: string, item: string) {
+  const all = readJson<ChecklistMap>(CHECKLIST_KEY, {});
+  const current = all[trilhaId] ?? {};
+  all[trilhaId] = { ...current, [item]: !current[item] };
+  writeJson(CHECKLIST_KEY, all);
+  const done = CHECKLIST_PARTIDA_ITEMS.every((i) => all[trilhaId][i]);
+  const progress = getTrilhaProgress(trilhaId);
+  saveTrilhaProgress(trilhaId, {
+    ...progress,
+    etapas: { ...progress.etapas, "checklist-partida": done ? "concluida" : "pendente" },
+  });
+  return all[trilhaId];
+}
+
+export function loadAvaliacaoPratica(funcionarioId: string) {
+  return readJson<ChecklistMap>(INSTRUTOR_CHECKLIST_KEY, {})[funcionarioId] ?? {};
+}
+
+export function toggleAvaliacaoPratica(funcionarioId: string, item: string) {
+  const all = readJson<ChecklistMap>(INSTRUTOR_CHECKLIST_KEY, {});
+  const current = all[funcionarioId] ?? {};
+  all[funcionarioId] = { ...current, [item]: !current[item] };
+  writeJson(INSTRUTOR_CHECKLIST_KEY, all);
+  return all[funcionarioId];
+}
+
+export function isAvaliacaoPraticaAprovada(items: Record<string, boolean>) {
+  return AVALIACAO_PRATICA_ITEMS.every((item) => items[item]);
 }
 
 export function areEtapasTeoricasConcluidas(etapas: TrilhaEtapa[], progress: TrilhaProgressLocal) {
   return etapas
-    .filter((etapa) => etapa.tipo === "teorica" || etapa.tipo === "quiz")
+    .filter(
+      (etapa) => etapa.tipo === "teorica" || etapa.tipo === "quiz" || etapa.tipo === "checklist",
+    )
     .every((etapa) => progress.etapas[etapa.id] === "concluida");
 }
 
@@ -113,4 +167,11 @@ export function getTrilhasComProgresso() {
     status: getStatusTrilha(trilha, trilha.etapas),
     progresso: getProgressoTrilha(trilha, trilha.etapas),
   }));
+}
+
+export function resetDemoData() {
+  if (!isBrowser()) return;
+  [PROGRESS_KEY, FUNCIONARIOS_KEY, CHECKLIST_KEY, INSTRUTOR_CHECKLIST_KEY].forEach((key) =>
+    window.localStorage.removeItem(key),
+  );
 }
