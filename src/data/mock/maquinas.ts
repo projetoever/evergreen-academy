@@ -26,7 +26,11 @@ export const MAQUINAS_MOCK: Maquina[] = [
     alarmes: [
       { codigo: "A101", descricao: "Falta de não tecido", acao: "Trocar bobina e resetar." },
       { codigo: "A204", descricao: "Vácuo baixo", acao: "Verificar filtro e mangueiras." },
-      { codigo: "A310", descricao: "Temperatura cola fora da faixa", acao: "Aguardar estabilizar." },
+      {
+        codigo: "A310",
+        descricao: "Temperatura cola fora da faixa",
+        acao: "Aguardar estabilizar.",
+      },
     ],
     pontosSeguranca: [
       {

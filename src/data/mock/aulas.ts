@@ -115,10 +115,7 @@ export const AULAS_MOCK: Aula[] = [
     tempoMin: 4,
     icone: "Eye",
     analogia: "Como sensor de presença da luz de casa.",
-    comoApareceNaMaquina: [
-      "Luzinhas que acendem na máquina.",
-      "Mensagens de falha na IHM.",
-    ],
+    comoApareceNaMaquina: ["Luzinhas que acendem na máquina.", "Mensagens de falha na IHM."],
     cuidado: "Sensor sujo dá leitura errada.",
   },
   {

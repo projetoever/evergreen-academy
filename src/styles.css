@@ -130,7 +130,15 @@
 /* Subtle app shell background pattern on larger screens */
 .app-shell-bg {
   background:
-    radial-gradient(at 0% 0%, color-mix(in oklab, var(--color-primary) 8%, transparent) 0, transparent 50%),
-    radial-gradient(at 100% 100%, color-mix(in oklab, var(--color-accent) 10%, transparent) 0, transparent 50%),
+    radial-gradient(
+      at 0% 0%,
+      color-mix(in oklab, var(--color-primary) 8%, transparent) 0,
+      transparent 50%
+    ),
+    radial-gradient(
+      at 100% 100%,
+      color-mix(in oklab, var(--color-accent) 10%, transparent) 0,
+      transparent 50%
+    ),
     var(--color-muted);
 }

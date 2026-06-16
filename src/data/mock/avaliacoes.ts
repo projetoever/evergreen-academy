@@ -28,7 +28,13 @@ export const QUIZ_MOCK: QuizPergunta[] = [
 ];
 
 export const HISTORICO_MOCK = [
-  { id: "h1", titulo: "Quiz Conceitos Básicos", data: "12/06/2026", resultado: "Aprovado", nota: 90 },
+  {
+    id: "h1",
+    titulo: "Quiz Conceitos Básicos",
+    data: "12/06/2026",
+    resultado: "Aprovado",
+    nota: 90,
+  },
   { id: "h2", titulo: "Prática Haina Fralda", data: "08/06/2026", resultado: "Aprovado", nota: 85 },
   { id: "h3", titulo: "Reciclagem Lenços", data: "02/05/2026", resultado: "Reprovado", nota: 60 },
 ];

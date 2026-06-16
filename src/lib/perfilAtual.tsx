@@ -39,9 +39,7 @@ export function PerfilProvider({ children }: { children: ReactNode }) {
     [papel],
   );
 
-  return (
-    <Ctx.Provider value={{ usuario, setPapel, perfis: PERFIS_MOCK }}>{children}</Ctx.Provider>
-  );
+  return <Ctx.Provider value={{ usuario, setPapel, perfis: PERFIS_MOCK }}>{children}</Ctx.Provider>;
 }
 
 export function usePerfil() {

@@ -78,8 +78,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       {
         name: "viewport",
-        content:
-          "width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no",
+        content: "width=device-width, initial-scale=1, viewport-fit=cover",
       },
       { title: "Evergreen Academy" },
       {
@@ -101,11 +100,31 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:title", content: "Evergreen Academy" },
-      { name: "description", content: "Evergreen Academy Learn is a mobile-first PWA for industrial operations training." },
-      { property: "og:description", content: "Evergreen Academy Learn is a mobile-first PWA for industrial operations training." },
-      { name: "twitter:description", content: "Evergreen Academy Learn is a mobile-first PWA for industrial operations training." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/c8e6d2fc-678c-4533-aa35-384a19704537/id-preview-970e1027--00c1d0d6-3213-4596-bef0-675d11921666.lovable.app-1781559146297.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/c8e6d2fc-678c-4533-aa35-384a19704537/id-preview-970e1027--00c1d0d6-3213-4596-bef0-675d11921666.lovable.app-1781559146297.png" },
+      {
+        name: "description",
+        content:
+          "Evergreen Academy Learn is a mobile-first PWA for industrial operations training.",
+      },
+      {
+        property: "og:description",
+        content:
+          "Evergreen Academy Learn is a mobile-first PWA for industrial operations training.",
+      },
+      {
+        name: "twitter:description",
+        content:
+          "Evergreen Academy Learn is a mobile-first PWA for industrial operations training.",
+      },
+      {
+        property: "og:image",
+        content:
+          "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/c8e6d2fc-678c-4533-aa35-384a19704537/id-preview-970e1027--00c1d0d6-3213-4596-bef0-675d11921666.lovable.app-1781559146297.png",
+      },
+      {
+        name: "twitter:image",
+        content:
+          "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/c8e6d2fc-678c-4533-aa35-384a19704537/id-preview-970e1027--00c1d0d6-3213-4596-bef0-675d11921666.lovable.app-1781559146297.png",
+      },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -136,7 +155,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="pt-BR">
       <head>
         <HeadContent />
       </head>

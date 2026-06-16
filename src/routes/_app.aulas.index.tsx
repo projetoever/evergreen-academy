@@ -48,7 +48,9 @@ function AulasPage() {
               <p className="truncate text-sm font-bold">{aula.titulo}</p>
               <p className="line-clamp-2 text-xs text-muted-foreground">{aula.descricao}</p>
               <div className="mt-2 flex flex-wrap items-center gap-1.5">
-                <span className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${nivelBadge[aula.nivel]}`}>
+                <span
+                  className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${nivelBadge[aula.nivel]}`}
+                >
                   {nivelLabel[aula.nivel]}
                 </span>
                 <span className="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-0.5 text-[10px] font-medium text-muted-foreground">

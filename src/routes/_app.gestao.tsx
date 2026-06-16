@@ -21,7 +21,10 @@ function GestaoPage() {
       <Stat icon={<Factory className="h-4 w-4" />} titulo="Máquinas" total={MAQUINAS_MOCK.length}>
         <ul className="mt-2 space-y-1 text-sm">
           {MAQUINAS_MOCK.map((m) => (
-            <li key={m.id} className="flex items-center justify-between border-b border-border/60 py-1.5 last:border-0">
+            <li
+              key={m.id}
+              className="flex items-center justify-between border-b border-border/60 py-1.5 last:border-0"
+            >
               <span className="truncate">{m.nome}</span>
               <span className="text-[10px] text-muted-foreground">{m.qrCode}</span>
             </li>
@@ -38,7 +41,10 @@ function GestaoPage() {
       <Stat icon={<Users className="h-4 w-4" />} titulo="Usuários" total={PERFIS_MOCK.length}>
         <ul className="mt-2 space-y-1 text-sm">
           {PERFIS_MOCK.map((p) => (
-            <li key={p.id} className="flex items-center justify-between border-b border-border/60 py-1.5 last:border-0">
+            <li
+              key={p.id}
+              className="flex items-center justify-between border-b border-border/60 py-1.5 last:border-0"
+            >
               <span className="truncate">{p.nome}</span>
               <span className="text-[10px] text-muted-foreground">{PAPEL_LABEL[p.papel]}</span>
             </li>

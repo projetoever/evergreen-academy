@@ -7,9 +7,7 @@ export const Route = createFileRoute("/m/$codigo")({
 
 function QrResolver() {
   const { codigo } = Route.useParams();
-  const maquina = MAQUINAS_MOCK.find(
-    (m) => m.qrCode.toLowerCase() === codigo.toLowerCase(),
-  );
+  const maquina = MAQUINAS_MOCK.find((m) => m.qrCode.toLowerCase() === codigo.toLowerCase());
   if (!maquina) {
     return (
       <div className="grid min-h-screen place-items-center bg-background px-6 text-center">
