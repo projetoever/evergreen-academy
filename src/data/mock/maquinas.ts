@@ -645,35 +645,417 @@ export const MAQUINAS_MOCK: Maquina[] = [
     qrCode: "MQ-003",
     statusTreinamento: "em-desenvolvimento",
     operadoresHabilitados: 3,
-    modulos: ["Desbobinamento", "Umectação", "Corte", "Embalagem", "Aplicação de tampa"],
+    descricaoOperacional:
+      "Linha destinada à fabricação de lenços umedecidos, com alimentação de não tecido, controle de tensão da bobina, dobra do material, aplicação ou dosagem de solução, corte, contagem, empilhamento, inserção na embalagem, selagem e saída do pacote final.",
+    objetivoTreinamento:
+      "Preparar o operador iniciante para reconhecer o fluxo da linha de lenços, conferir materiais e parâmetros básicos, executar checklist de partida assistido, identificar defeitos comuns e comunicar desvios sem intervir em partes móveis, corte, selagem ou dosagem sem autorização.",
+    materiaisEntrada: [
+      "Bobina de não tecido",
+      "Solução umectante",
+      "Embalagem plástica",
+      "Etiqueta ou tampa quando aplicável",
+      "Filme de embalagem",
+      "Material de selagem",
+      "Caixas ou fardos de embalagem final",
+    ],
+    produtoSaida: "Pacote de lenços umedecidos",
+    componentesPrincipais: [
+      "Desbobinador de não tecido",
+      "Controle de tensão",
+      "Sistema de dobra",
+      "Unidade de aplicação de solução",
+      "Rolos de tração",
+      "Sistema de corte",
+      "Contador de folhas",
+      "Empilhador",
+      "Alimentador de embalagem",
+      "Unidade de selagem",
+      "Esteira de saída",
+      "Sensores de presença e posição",
+    ],
+    parametrosBasicos: [
+      {
+        nome: "Velocidade da linha",
+        valorReferencia: "Definida por receita e liberada pelo instrutor",
+        cuidado: "Aumentar apenas com corte, contagem, empilhamento e selagem estáveis.",
+      },
+      {
+        nome: "Tensão da bobina",
+        valorReferencia: "Não tecido tracionado sem rasgar, enrugar ou oscilar",
+        cuidado: "Tensão incorreta causa dobra irregular e corte desalinhado.",
+      },
+      {
+        nome: "Quantidade de solução aplicada",
+        valorReferencia: "Conforme receita do produto e padrão de umidade",
+        cuidado: "Baixa dosagem gera lenço seco; excesso pode causar vazamento do pacote.",
+      },
+      {
+        nome: "Pressão pneumática",
+        valorReferencia: "Faixa operacional indicada na IHM/manômetro",
+        cuidado: "Pressão baixa afeta atuadores, corte, selagem e alimentação da embalagem.",
+      },
+      {
+        nome: "Temperatura de selagem",
+        valorReferencia: "Conforme filme/embalagem e receita em uso",
+        cuidado: "Risco de queimadura; ajustes técnicos devem ser feitos por pessoa autorizada.",
+      },
+      {
+        nome: "Posição de corte",
+        valorReferencia: "Corte alinhado ao comprimento da folha",
+        cuidado: "Desvio repetitivo deve ser segregado e comunicado.",
+      },
+      {
+        nome: "Quantidade de folhas por pacote",
+        valorReferencia: "Conforme ordem de produção/receita",
+        cuidado: "Conferir amostras iniciais e sempre que houver alarme de contagem.",
+      },
+      {
+        nome: "Sincronismo entre corte e embalagem",
+        valorReferencia: "Pilhas entram centralizadas e no tempo correto",
+        cuidado: "Não corrigir produto preso com a linha em movimento.",
+      },
+      {
+        nome: "Alinhamento do pacote",
+        valorReferencia: "Pacote reto, sem amassar e com selagem uniforme",
+        cuidado: "Pacote torto pode indicar falha de alimentação ou empilhamento.",
+      },
+    ],
+    defeitosProduto: [
+      {
+        defeito: "Lenço seco",
+        possivelCausa:
+          "Baixo nível de solução, dosagem insuficiente, bico/linha obstruída ou receita incorreta.",
+        verificacaoInicial:
+          "Conferir nível de solução, tela de dosagem, amostras recentes e alarmes sem acessar a área em movimento.",
+        quandoChamarInstrutor:
+          "Quando houver dúvida sobre padrão de umidade, segregação ou ajuste operacional permitido.",
+        quandoChamarManutencao: "Se bomba, válvula, sensor de nível ou bicos não estabilizarem.",
+      },
+      {
+        defeito: "Excesso de solução",
+        possivelCausa:
+          "Dosagem alta, falha de válvula, velocidade inadequada ou receita incorreta.",
+        verificacaoInicial:
+          "Comparar amostras, observar gotejamento e conferir parâmetros de dosagem na IHM.",
+        quandoChamarInstrutor: "Quando o pacote ficar encharcado ou houver dúvida de liberação.",
+        quandoChamarManutencao: "Se houver vazamento, válvula travada ou bomba sem controle.",
+      },
+      {
+        defeito: "Pacote vazando",
+        possivelCausa:
+          "Excesso de solução, selagem baixa, embalagem danificada ou sujeira na área de selagem.",
+        verificacaoInicial:
+          "Segregar pacotes, conferir temperatura de selagem e observar integridade da embalagem.",
+        quandoChamarInstrutor:
+          "Sempre que houver repetição ou necessidade de decidir descarte/retrabalho.",
+        quandoChamarManutencao: "Se o selador, sensor ou controle de temperatura falhar.",
+      },
+      {
+        defeito: "Corte desalinhado",
+        possivelCausa: "Posição de corte, tensão da bobina ou sincronismo fora de referência.",
+        verificacaoInicial:
+          "Separar amostras, conferir receita e observar o corte sem tocar nos mecanismos.",
+        quandoChamarInstrutor: "Quando o desvio aparecer em sequência.",
+        quandoChamarManutencao: "Se lâmina, encoder, sensor ou atuador apresentar falha.",
+      },
+      {
+        defeito: "Dobra irregular",
+        possivelCausa: "Sistema de dobra desalinhado, tensão instável ou material enrugado.",
+        verificacaoInicial:
+          "Observar passagem do não tecido e presença de acúmulo com a máquina em condição segura.",
+        quandoChamarInstrutor:
+          "Quando for necessário refazer passagem de material durante treinamento.",
+        quandoChamarManutencao: "Se guias, rolos ou atuadores estiverem danificados.",
+      },
+      {
+        defeito: "Quantidade errada de folhas",
+        possivelCausa:
+          "Sensor de contagem sem sinal, folha sobreposta, corte irregular ou empilhador instável.",
+        verificacaoInicial:
+          "Conferir contagem manual de amostras e tela de diagnóstico de sensores.",
+        quandoChamarInstrutor: "Quando impactar liberação do lote ou ajuste de receita.",
+        quandoChamarManutencao: "Se sensor, contador ou empilhador falhar repetidamente.",
+      },
+      {
+        defeito: "Embalagem mal selada",
+        possivelCausa:
+          "Temperatura/pressão/tempo de selagem incorretos, filme desalinhado ou mordente sujo.",
+        verificacaoInicial: "Inspecionar bordas do pacote e conferir tela de selagem.",
+        quandoChamarInstrutor: "Quando houver dúvida sobre padrão visual de selagem.",
+        quandoChamarManutencao: "Se resistência, termopar, mordente ou controle não estabilizar.",
+      },
+      {
+        defeito: "Pacote amassado",
+        possivelCausa:
+          "Empilhamento irregular, alimentação fora de sincronismo ou esteira de saída obstruída.",
+        verificacaoInicial:
+          "Conferir saída, acúmulo e alinhamento do pacote sem intervir em movimento.",
+        quandoChamarInstrutor: "Quando a ocorrência se repetir após limpeza/organização segura.",
+        quandoChamarManutencao: "Se esteira, guia, atuador ou sensor estiver falhando.",
+      },
+      {
+        defeito: "Falha de alimentação da embalagem",
+        possivelCausa:
+          "Embalagem plástica fora de posição, magazine vazio, filme desalinhado ou sensor sem leitura.",
+        verificacaoInicial: "Conferir presença do material e alarmes da tela de embalagem.",
+        quandoChamarInstrutor: "Quando for necessário reposicionar material durante treinamento.",
+        quandoChamarManutencao: "Se alimentador, sensor ou atuador não responder.",
+      },
+      {
+        defeito: "Contaminação visual",
+        possivelCausa: "Área suja, solução derramada, material contaminado ou contato indevido.",
+        verificacaoInicial: "Parar em condição segura, segregar produto e comunicar liderança.",
+        quandoChamarInstrutor: "Sempre, para orientação de segregação e registro.",
+        quandoChamarManutencao: "Se a fonte for vazamento, óleo, graxa ou componente da máquina.",
+      },
+    ],
+    pontosIHM: [
+      {
+        titulo: "Tela principal",
+        objetivo: "Acompanhar estado da linha, partida/parada, velocidade e resumo de parâmetros.",
+        observacao: "Operador iniciante usa para consulta e comandos liberados pelo instrutor.",
+      },
+      {
+        titulo: "Tela de alarmes",
+        objetivo: "Identificar código, área afetada, descrição e histórico de falhas.",
+        observacao: "Não resetar alarme repetitivo sem investigar e comunicar.",
+      },
+      {
+        titulo: "Tela de receitas",
+        objetivo: "Confirmar produto, quantidade de folhas, dosagem e parâmetros de embalagem.",
+        observacao: "Troca de receita é atividade assistida.",
+      },
+      {
+        titulo: "Tela de velocidade",
+        objetivo: "Visualizar velocidade atual e meta operacional.",
+        observacao: "Não aumentar velocidade para compensar parada sem autorização.",
+      },
+      {
+        titulo: "Tela de dosagem de solução",
+        objetivo: "Monitorar nível, bomba, vazão e quantidade aplicada.",
+        observacao: "Divergência de umidade exige segregação e apoio.",
+      },
+      {
+        titulo: "Tela de selagem",
+        objetivo: "Monitorar temperatura, pressão/tempo e estado da unidade de selagem.",
+        observacao: "Área quente; ajustes técnicos são restritos.",
+      },
+      {
+        titulo: "Diagnóstico de sensores",
+        objetivo: "Apoiar leitura de sensores de presença, posição, embalagem e segurança.",
+        observacao: "Nunca burlar sensor, chave de segurança ou proteção.",
+      },
+      {
+        titulo: "Contagem de folhas",
+        objetivo: "Acompanhar contagem por pacote e sinais do contador.",
+        observacao: "Conferir amostras se houver divergência ou alarme.",
+      },
+    ],
+    perguntasFrequentes: [
+      {
+        pergunta: "O que verificar se o lenço sair seco?",
+        resposta:
+          "Confira nível de solução, tela de dosagem, receita carregada, bomba/linha sem alarme e padrão das amostras. Se repetir, pare em condição segura e chame o instrutor.",
+      },
+      {
+        pergunta: "O que verificar se o pacote estiver vazando?",
+        resposta:
+          "Segregue os pacotes, confira excesso de solução, integridade da embalagem e temperatura de selagem. Não toque na área quente.",
+      },
+      {
+        pergunta: "Quando chamar o instrutor?",
+        resposta:
+          "Na primeira partida, troca de material em treinamento, dúvida de qualidade, defeito repetitivo ou necessidade de confirmar ajuste operacional permitido.",
+      },
+      {
+        pergunta: "Quando chamar manutenção?",
+        resposta:
+          "Quando houver falha mecânica, elétrica, pneumática, sensor sem sinal, vazamento, ruído anormal ou necessidade de abrir proteção/intervir tecnicamente.",
+      },
+      {
+        pergunta: "O que observar antes da primeira partida?",
+        resposta:
+          "EPIs, proteções, área limpa, bobina de não tecido, nível de solução, embalagem, pressão pneumática, temperatura de selagem, receita correta e ausência de ferramentas soltas.",
+      },
+      {
+        pergunta: "O que nunca fazer com a linha em movimento?",
+        resposta:
+          "Nunca colocar a mão em rolos, corte, selagem ou embalagem; nunca puxar material preso, limpar rolos, burlar proteções ou ajustar sensores.",
+      },
+      {
+        pergunta: "Como identificar falha de selagem?",
+        resposta:
+          "Observe bordas abertas, vazamento, filme queimado/enrugado, pacote abrindo na inspeção e alarmes/temperaturas fora da faixa.",
+      },
+      {
+        pergunta: "O que pode causar quantidade errada de folhas?",
+        resposta:
+          "Sensor de contagem sem sinal, folhas sobrepostas, corte desalinhado, empilhador instável ou sincronismo incorreto entre corte e embalagem.",
+      },
+    ],
+    documentosRelacionados: [
+      "manual-lencos-umedecidos",
+      "checklist-partida-lencos",
+      "ihm-dosagem-solucao-lencos",
+      "ihm-selagem-lencos",
+      "troca-bobina-nao-tecido-lencos",
+      "abastecimento-seguro-solucao-lencos",
+      "parada-segura-lencos",
+      "defeitos-lencos-umedecidos",
+      "liberacao-operador-lencos",
+    ],
+    nivelComplexidade: "intermediario",
+    tempoEstimadoTreinamento: "5 a 7 horas de teoria e prática acompanhada",
+    modulos: [
+      "Alimentação de não tecido",
+      "Dobra e dosagem de solução",
+      "Corte e contagem",
+      "Empilhamento",
+      "Embalagem e selagem",
+      "Inspeção e saída",
+    ],
     checklist: [
-      { id: "c1", texto: "Tanque de solução cheio" },
-      { id: "c2", texto: "Bicos de umectação limpos" },
-      { id: "c3", texto: "Bobina de não tecido carregada" },
+      { id: "c1", texto: "Conferir EPIs obrigatórios." },
+      { id: "c2", texto: "Verificar proteções e portas de segurança." },
+      { id: "c3", texto: "Conferir bobina de não tecido." },
+      { id: "c4", texto: "Conferir nível/abastecimento da solução umectante." },
+      { id: "c5", texto: "Conferir embalagem plástica." },
+      { id: "c6", texto: "Conferir temperatura de selagem." },
+      { id: "c7", texto: "Conferir pressão pneumática." },
+      { id: "c8", texto: "Verificar ausência de ferramentas soltas." },
+      { id: "c9", texto: "Confirmar área limpa e segura." },
+      { id: "c10", texto: "Chamar instrutor antes da primeira partida." },
     ],
     alarmes: [
-      { codigo: "L101", descricao: "Nível baixo de solução", acao: "Reabastecer tanque." },
-      { codigo: "L205", descricao: "Tampa não aplicada", acao: "Verificar magazine de tampas." },
+      {
+        codigo: "L101",
+        descricao: "Falta de não tecido.",
+        acao: "Parar em condição segura, conferir bobina e chamar instrutor para troca assistida.",
+      },
+      {
+        codigo: "L102",
+        descricao: "Baixo nível de solução.",
+        acao: "Conferir abastecimento e seguir procedimento seguro antes de retomar.",
+      },
+      {
+        codigo: "L201",
+        descricao: "Falha de selagem.",
+        acao: "Segregar pacotes, conferir tela de selagem e comunicar instrutor.",
+      },
+      {
+        codigo: "L301",
+        descricao: "Falha de alimentação da embalagem.",
+        acao: "Conferir presença/alinhamento do material sem acessar partes móveis.",
+      },
+      {
+        codigo: "L410",
+        descricao: "Sensor de contagem sem sinal.",
+        acao: "Verificar diagnóstico na IHM e chamar manutenção se repetir.",
+      },
+      {
+        codigo: "L520",
+        descricao: "Pressão pneumática baixa.",
+        acao: "Comunicar manutenção; não regular válvulas sem autorização.",
+      },
+      {
+        codigo: "L630",
+        descricao: "Produto preso na saída.",
+        acao: "Parar a linha, aguardar liberação segura e chamar instrutor.",
+      },
     ],
     pontosSeguranca: [
       {
-        titulo: "Produto químico",
-        risco: "Contato com solução pode irritar.",
-        epi: ["Luva nitrílica", "Óculos"],
-        procedimento: "Lavar imediatamente em caso de contato.",
+        titulo: "Rolos de tração",
+        risco: "Podem puxar mãos, cabelo, luvas ou uniforme.",
+        epi: ["Cabelo preso", "Sem adornos", "Óculos de segurança"],
+        procedimento:
+          "Manter proteções fechadas e nunca puxar não tecido com a linha em movimento.",
+        nivel: "alto",
+      },
+      {
+        titulo: "Pontos de corte",
+        risco: "Facas e corte transversal podem causar ferimentos graves.",
+        epi: ["Luva anti-corte", "Óculos de segurança"],
+        procedimento: "Limpeza e retirada de refugo somente com parada segura e liberação.",
+        nivel: "alto",
+      },
+      {
+        titulo: "Área de selagem quente",
+        risco: "Mordentes e resistências podem causar queimaduras.",
+        epi: ["Luva térmica"],
+        procedimento:
+          "Não tocar na unidade de selagem; chamar instrutor/manutenção em falha repetitiva.",
+        nivel: "alto",
+      },
+      {
+        titulo: "Partes móveis",
+        risco: "Empilhador, esteiras e alimentadores movimentam em ciclo automático.",
+        epi: ["Óculos de segurança", "Cabelo preso"],
+        procedimento: "Nunca intervir com máquina em movimento ou proteção aberta indevidamente.",
+        nivel: "alto",
+      },
+      {
+        titulo: "Energia pneumática",
+        risco: "Atuadores podem movimentar durante reset ou queda/retorno de pressão.",
+        epi: ["Óculos de segurança"],
+        procedimento: "Não regular válvulas; comunicar pressão baixa ou movimento inesperado.",
         nivel: "medio",
       },
       {
-        titulo: "Piso molhado",
-        risco: "Risco de queda.",
-        epi: ["Calçado antiderrapante"],
-        procedimento: "Sinalizar e limpar áreas com solução.",
+        titulo: "Risco de escorregamento por solução",
+        risco: "Solução no piso pode causar queda e contaminação visual.",
+        epi: ["Calçado antiderrapante", "Luva nitrílica"],
+        procedimento: "Sinalizar, conter e limpar derramamento conforme orientação segura.",
         nivel: "medio",
+      },
+      {
+        titulo: "Proibição de intervenção em movimento",
+        risco:
+          "Acesso a corte, rolos, selagem ou embalagem em movimento pode causar acidente grave.",
+        epi: ["EPI completo da área"],
+        procedimento:
+          "Nunca burlar proteções; chamar instrutor/manutenção em caso de alarme repetitivo.",
+        nivel: "alto",
       },
     ],
     documentos: [
-      { id: "d1", titulo: "Ficha de segurança da solução", tipo: "pdf" },
-      { id: "d2", titulo: "Manual da linha", tipo: "manual" },
+      {
+        id: "manual-lencos-umedecidos",
+        titulo: "Manual rápido — Linha Lenços Umedecidos",
+        tipo: "manual",
+      },
+      {
+        id: "checklist-partida-lencos",
+        titulo: "Checklist de partida — Lenços Umedecidos",
+        tipo: "checklist",
+      },
+      { id: "ihm-dosagem-solucao-lencos", titulo: "Print IHM — Dosagem de solução", tipo: "ihm" },
+      { id: "ihm-selagem-lencos", titulo: "Print IHM — Selagem", tipo: "ihm" },
+      {
+        id: "troca-bobina-nao-tecido-lencos",
+        titulo: "Procedimento — Troca de bobina de não tecido",
+        tipo: "procedimento",
+      },
+      {
+        id: "abastecimento-seguro-solucao-lencos",
+        titulo: "Procedimento — Abastecimento seguro de solução",
+        tipo: "procedimento",
+      },
+      {
+        id: "parada-segura-lencos",
+        titulo: "Procedimento — Parada segura da linha de lenços",
+        tipo: "procedimento",
+      },
+      {
+        id: "defeitos-lencos-umedecidos",
+        titulo: "Documento — Defeitos comuns em lenços umedecidos",
+        tipo: "pdf",
+      },
+      {
+        id: "liberacao-operador-lencos",
+        titulo: "Checklist — Liberação de operador na linha de lenços",
+        tipo: "checklist",
+      },
     ],
   },
   {

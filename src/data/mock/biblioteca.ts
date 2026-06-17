@@ -182,4 +182,86 @@ export const BIBLIOTECA_MOCK: ItemBiblioteca[] = [
     maquinaId: "mq-haina-absorvente",
     status: "mock",
   },
+
+  {
+    id: "manual-lencos-umedecidos",
+    tipo: "manual",
+    titulo: "Manual rápido — Linha Lenços Umedecidos",
+    descricao:
+      "Resumo operacional da linha de lenços: fluxo do não tecido, dosagem de solução, corte, contagem, embalagem, selagem e saída segura.",
+    maquinaId: "mq-lencos",
+    status: "mock",
+  },
+  {
+    id: "checklist-partida-lencos",
+    tipo: "checklist",
+    titulo: "Checklist de partida — Lenços Umedecidos",
+    descricao:
+      "Conferências mockadas de EPIs, proteções, bobina, solução, embalagem, selagem, pressão pneumática e chamada do instrutor.",
+    maquinaId: "mq-lencos",
+    status: "mock",
+  },
+  {
+    id: "ihm-dosagem-solucao-lencos",
+    tipo: "ihm",
+    titulo: "Print IHM — Dosagem de solução",
+    descricao:
+      "Referência visual simulada para monitorar nível, bomba, vazão, receita e quantidade de solução aplicada nos lenços.",
+    maquinaId: "mq-lencos",
+    status: "mock",
+  },
+  {
+    id: "ihm-selagem-lencos",
+    tipo: "ihm",
+    titulo: "Print IHM — Selagem",
+    descricao:
+      "Referência visual simulada para temperatura, tempo/pressão de selagem e alarmes de pacote aberto ou vazando.",
+    maquinaId: "mq-lencos",
+    status: "mock",
+  },
+  {
+    id: "troca-bobina-nao-tecido-lencos",
+    tipo: "procedimento",
+    titulo: "Procedimento — Troca de bobina de não tecido",
+    descricao:
+      "Passo a passo demonstrativo para troca assistida de bobina, passagem segura do material e validação antes da partida.",
+    maquinaId: "mq-lencos",
+    status: "mock",
+  },
+  {
+    id: "abastecimento-seguro-solucao-lencos",
+    tipo: "procedimento",
+    titulo: "Procedimento — Abastecimento seguro de solução",
+    descricao:
+      "Orientação mockada para abastecer solução umectante com EPIs, contenção de derramamento e comunicação de desvios.",
+    maquinaId: "mq-lencos",
+    status: "mock",
+  },
+  {
+    id: "parada-segura-lencos",
+    tipo: "procedimento",
+    titulo: "Procedimento — Parada segura da linha de lenços",
+    descricao:
+      "Sequência simulada para parar a linha, proteger área de corte/selagem, segregar produto e acionar apoio.",
+    maquinaId: "mq-lencos",
+    status: "mock",
+  },
+  {
+    id: "defeitos-lencos-umedecidos",
+    tipo: "pdf",
+    titulo: "Documento — Defeitos comuns em lenços umedecidos",
+    descricao:
+      "Guia visual simulado para lenço seco, excesso de solução, pacote vazando, corte desalinhado, dobra irregular e falha de contagem.",
+    maquinaId: "mq-lencos",
+    status: "mock",
+  },
+  {
+    id: "liberacao-operador-lencos",
+    tipo: "checklist",
+    titulo: "Checklist — Liberação de operador na linha de lenços",
+    descricao:
+      "Modelo de validação futura para operador iniciante, mantendo a trilha de lenços como pendente nesta versão.",
+    maquinaId: "mq-lencos",
+    status: "mock",
+  },
 ];

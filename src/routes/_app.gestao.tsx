@@ -73,11 +73,13 @@ function GestaoPage() {
             const statusConteudo =
               m.id === "mq-haina-absorvente"
                 ? "técnico disponível · trilha disponível"
-                : m.id === "mq-haina-fralda"
-                  ? "pendente revisão"
-                  : m.statusTreinamento === "disponivel"
-                    ? "mockado"
-                    : "mockado";
+                : m.id === "mq-lencos"
+                  ? "técnico disponível · trilha pendente"
+                  : m.id === "mq-haina-fralda"
+                    ? "pendente revisão"
+                    : m.statusTreinamento === "disponivel"
+                      ? "mockado"
+                      : "mockado";
             return (
               <article key={m.id} className="rounded-xl border border-border bg-background p-3">
                 <div className="flex items-center justify-between gap-2">
