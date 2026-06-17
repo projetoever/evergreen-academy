@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { resetDemoData } from "@/lib/trilhasProgress";
 import { AULAS_MOCK } from "@/data/mock/aulas";
 import { PERFIS_MOCK, PAPEL_LABEL } from "@/data/mock/perfis";
+import { BIBLIOTECA_MOCK } from "@/data/mock/biblioteca";
 import { Factory, GraduationCap, RotateCcw, Table2, Users } from "lucide-react";
 
 export const Route = createFileRoute("/_app/gestao")({
@@ -55,6 +56,44 @@ function GestaoPage() {
         >
           Resetar progresso de demonstração
         </Button>
+      </section>
+
+      <section className="mx-4 mt-3 rounded-2xl border border-border bg-card p-4">
+        <div className="flex items-center gap-2">
+          <div className="grid h-8 w-8 place-items-center rounded-lg bg-primary/10 text-primary">
+            <Factory className="h-4 w-4" />
+          </div>
+          <p className="text-sm font-bold">Conteúdo por máquina</p>
+        </div>
+        <div className="mt-3 space-y-3">
+          {MAQUINAS_MOCK.map((m) => {
+            const documentos =
+              BIBLIOTECA_MOCK.filter((d) => d.maquinaId === m.id).length || m.documentos.length;
+            const checklists = m.checklist.length;
+            const statusConteudo =
+              m.id === "mq-haina-fralda"
+                ? "pendente revisão"
+                : m.statusTreinamento === "disponivel"
+                  ? "mockado"
+                  : "mockado";
+            return (
+              <article key={m.id} className="rounded-xl border border-border bg-background p-3">
+                <div className="flex items-center justify-between gap-2">
+                  <p className="truncate text-sm font-extrabold">{m.nome}</p>
+                  <span className="rounded-full bg-warning/20 px-2 py-0.5 text-[10px] font-bold uppercase">
+                    {statusConteudo}
+                  </span>
+                </div>
+                <div className="mt-2 grid grid-cols-4 gap-2 text-center">
+                  <MiniStat label="módulos" value={m.modulos.length} />
+                  <MiniStat label="docs" value={documentos} />
+                  <MiniStat label="checks" value={checklists} />
+                  <MiniStat label="segurança" value={m.pontosSeguranca.length} />
+                </div>
+              </article>
+            );
+          })}
+        </div>
       </section>
 
       <Stat icon={<Factory className="h-4 w-4" />} titulo="Máquinas" total={MAQUINAS_MOCK.length}>
@@ -118,5 +157,14 @@ function Stat({
       </div>
       {children}
     </section>
+  );
+}
+
+function MiniStat({ label, value }: { label: string; value: number }) {
+  return (
+    <div className="rounded-lg bg-muted/60 p-2">
+      <p className="text-sm font-extrabold">{value}</p>
+      <p className="text-[9px] uppercase text-muted-foreground">{label}</p>
+    </div>
   );
 }

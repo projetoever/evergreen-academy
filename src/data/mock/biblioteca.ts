@@ -73,6 +73,7 @@ export const BIBLIOTECA_MOCK: ItemBiblioteca[] = [
     tipo: "procedimento",
     titulo: "Procedimento — Parada segura da linha",
     descricao: "Orientação mockada para parar a linha, proteger área e acionar liderança.",
+    maquinaId: "mq-haina-fralda",
     status: "mock",
   },
   {
@@ -103,14 +104,18 @@ export const BIBLIOTECA_MOCK: ItemBiblioteca[] = [
     id: "seguranca",
     tipo: "pdf",
     titulo: "Documento — Pontos críticos de segurança",
-    descricao: "Lista de riscos, EPIs e bloqueios físicos relevantes para operadores iniciantes.",
+    descricao:
+      "Lista de riscos, EPIs e bloqueios físicos relevantes para operadores iniciantes. Vinculado à Haina para reforçar pontos quentes, lâminas e partes móveis.",
+    maquinaId: "mq-haina-fralda",
     status: "mock",
   },
   {
     id: "liberacao",
     tipo: "checklist",
     titulo: "Checklist — Liberação de operador iniciante",
-    descricao: "Modelo de validação final usado pelo instrutor antes da liberação mockada.",
+    descricao:
+      "Modelo de validação final usado pelo instrutor antes da liberação mockada na Haina Fralda Baby.",
+    maquinaId: "mq-haina-fralda",
     status: "mock",
   },
 ];

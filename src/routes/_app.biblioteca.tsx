@@ -1,18 +1,61 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
 import { BIBLIOTECA_CATEGORIAS, BIBLIOTECA_MOCK } from "@/data/mock/biblioteca";
 import { MAQUINAS_MOCK } from "@/data/mock/maquinas";
 import { PageHeader } from "@/components/common/PageHeader";
 import { IconLucide } from "@/components/common/IconLucide";
+import { Button } from "@/components/ui/button";
+import type { ItemBiblioteca } from "@/data/types";
 
 export const Route = createFileRoute("/_app/biblioteca")({ component: BibliotecaPage });
+
+type Filtro = "todos" | "maquina" | "tipo" | "seguranca" | "ihm" | "checklist";
+const filtros: Array<{ id: Filtro; label: string }> = [
+  { id: "todos", label: "Todos" },
+  { id: "maquina", label: "Máquina" },
+  { id: "tipo", label: "Tipo" },
+  { id: "seguranca", label: "Segurança" },
+  { id: "ihm", label: "IHM" },
+  { id: "checklist", label: "Checklist" },
+];
+
+function aplicaFiltro(item: ItemBiblioteca, filtro: Filtro) {
+  if (filtro === "todos") return true;
+  if (filtro === "maquina") return Boolean(item.maquinaId);
+  if (filtro === "tipo")
+    return ["manual", "pdf", "procedimento", "video", "foto"].includes(item.tipo);
+  if (filtro === "seguranca")
+    return (
+      item.titulo.toLowerCase().includes("segurança") ||
+      item.descricao.toLowerCase().includes("segurança") ||
+      item.descricao.toLowerCase().includes("risco")
+    );
+  return item.tipo === filtro;
+}
+
 function BibliotecaPage() {
+  const [filtro, setFiltro] = useState<Filtro>("todos");
+  const itens = BIBLIOTECA_MOCK.filter((item) => aplicaFiltro(item, filtro));
   return (
     <div>
       <PageHeader
         title="Biblioteca técnica"
         subtitle="Manuais, fotos, vídeos e procedimentos mockados"
       />
-      <div className="grid grid-cols-2 gap-3 px-4 py-3">
+      <div className="flex gap-2 overflow-x-auto px-4 py-3">
+        {filtros.map((f) => (
+          <Button
+            key={f.id}
+            size="sm"
+            variant={filtro === f.id ? "default" : "outline"}
+            className="shrink-0 rounded-full"
+            onClick={() => setFiltro(f.id)}
+          >
+            {f.label}
+          </Button>
+        ))}
+      </div>
+      <div className="grid grid-cols-2 gap-3 px-4 pb-3">
         {BIBLIOTECA_CATEGORIAS.map((c) => (
           <div
             key={c.tipo}
@@ -31,7 +74,7 @@ function BibliotecaPage() {
         ))}
       </div>
       <div className="space-y-3 px-4 pb-4">
-        {BIBLIOTECA_MOCK.map((item) => (
+        {itens.map((item) => (
           <article key={item.id} className="rounded-2xl border border-border bg-card p-4 shadow-sm">
             <div className="flex items-start justify-between gap-3">
               <div>
