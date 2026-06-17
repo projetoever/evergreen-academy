@@ -12,7 +12,11 @@ import {
 
 import { PageHeader } from "@/components/common/PageHeader";
 import { Button } from "@/components/ui/button";
-import { QUIZ_HAINA_ABSORVENTE_MOCK, QUIZ_MOCK } from "@/data/mock/avaliacoes";
+import {
+  QUIZ_HAINA_ABSORVENTE_MOCK,
+  QUIZ_LENCOS_UMEDECIDOS_MOCK,
+  QUIZ_MOCK,
+} from "@/data/mock/avaliacoes";
 import { MAQUINAS_MOCK } from "@/data/mock/maquinas";
 import { STATUS_LABEL, TRILHAS_MOCK } from "@/data/mock/treinamentos";
 import type { StatusTrilhaEtapa, TrilhaEtapa } from "@/data/types";
@@ -70,6 +74,16 @@ const linksSecoesHaina: Record<string, Array<{ label: string; tab: string }>> = 
     { label: "Ver IHM", tab: "ihm" },
   ],
   "seguranca-absorvente": [{ label: "Ver pontos de segurança", tab: "seguranca" }],
+  "processo-lencos-umedecidos": [
+    { label: "Ver fluxo e defeitos", tab: "defeitos" },
+    { label: "Ver documentos vinculados", tab: "documentos" },
+  ],
+  "linha-lencos-umedecidos": [
+    { label: "Ver componentes da máquina", tab: "componentes" },
+    { label: "Ver parâmetros básicos", tab: "parametros" },
+    { label: "Ver IHM", tab: "ihm" },
+  ],
+  "seguranca-lencos": [{ label: "Ver pontos de segurança", tab: "seguranca" }],
 };
 
 function TrilhaPage() {
@@ -263,7 +277,11 @@ function ChecklistPartida({ trilhaId, onChange }: { trilhaId: string; onChange: 
 
 function TrilhaQuiz({ trilhaId, onSaved }: { trilhaId: string; onSaved: () => void }) {
   const quizPerguntas =
-    trilhaId === "operador-inicial-haina-absorvente" ? QUIZ_HAINA_ABSORVENTE_MOCK : QUIZ_MOCK;
+    trilhaId === "operador-inicial-haina-absorvente"
+      ? QUIZ_HAINA_ABSORVENTE_MOCK
+      : trilhaId === "operador-inicial-lencos-umedecidos"
+        ? QUIZ_LENCOS_UMEDECIDOS_MOCK
+        : QUIZ_MOCK;
   const saved = getTrilhaProgress(trilhaId).quiz;
   const [respostas, setRespostas] = useState<Record<string, number>>({});
   const [resultado, setResultado] = useState(saved ?? null);

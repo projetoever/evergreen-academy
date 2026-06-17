@@ -260,7 +260,7 @@ export const BIBLIOTECA_MOCK: ItemBiblioteca[] = [
     tipo: "checklist",
     titulo: "Checklist — Liberação de operador na linha de lenços",
     descricao:
-      "Modelo de validação futura para operador iniciante, mantendo a trilha de lenços como pendente nesta versão.",
+      "Modelo de validação final para operador iniciante na Linha Lenços Umedecidos, vinculado à liberação mockada da trilha.",
     maquinaId: "mq-lencos",
     status: "mock",
   },

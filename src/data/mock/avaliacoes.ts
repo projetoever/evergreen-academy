@@ -121,3 +121,86 @@ export const QUIZ_HAINA_ABSORVENTE_MOCK: QuizPergunta[] = [
     correta: 0,
   },
 ];
+
+export const QUIZ_LENCOS_UMEDECIDOS_MOCK: QuizPergunta[] = [
+  {
+    id: "len-q1",
+    pergunta: "O que pode causar lenço seco?",
+    alternativas: [
+      "Baixa dosagem de solução umectante, falha de bomba ou bobina passando sem umectação",
+      "Temperatura de selagem acima do padrão",
+      "Excesso de caixas na expedição",
+    ],
+    correta: 0,
+  },
+  {
+    id: "len-q2",
+    pergunta: "O que verificar se o pacote estiver vazando?",
+    alternativas: [
+      "Somente a contagem total do turno",
+      "Selagem, filme da embalagem, sujeira na região de solda e excesso de solução",
+      "A cor da bobina de não tecido",
+    ],
+    correta: 1,
+  },
+  {
+    id: "len-q3",
+    pergunta: "Por que a temperatura de selagem é importante?",
+    alternativas: [
+      "Porque define a velocidade da esteira de saída",
+      "Porque ajuda a garantir pacote fechado sem queimar ou deformar a embalagem",
+      "Porque substitui a pressão pneumática",
+    ],
+    correta: 1,
+  },
+  {
+    id: "len-q4",
+    pergunta: "O que pode causar quantidade errada de folhas?",
+    alternativas: [
+      "Falha de contagem, corte irregular, escorregamento do material ou ajuste incorreto",
+      "Uso correto de EPIs",
+      "Área limpa antes da partida",
+    ],
+    correta: 0,
+  },
+  {
+    id: "len-q5",
+    pergunta: "O que fazer diante de alarme repetitivo?",
+    alternativas: [
+      "Burlar o sensor para manter a linha rodando",
+      "Comunicar instrutor/líder e chamar manutenção se o desvio persistir",
+      "Aumentar a velocidade da linha",
+    ],
+    correta: 1,
+  },
+  {
+    id: "len-q6",
+    pergunta: "Por que não se deve intervir com a linha em movimento?",
+    alternativas: [
+      "Porque há risco de arraste, corte, esmagamento e contato com área quente",
+      "Porque o pacote pode ficar com etiqueta torta",
+      "Porque reduz a leitura da IHM",
+    ],
+    correta: 0,
+  },
+  {
+    id: "len-q7",
+    pergunta: "Quando chamar manutenção?",
+    alternativas: [
+      "Em falha repetitiva, proteção danificada, vazamento, problema pneumático ou ajuste técnico",
+      "Apenas para marcar o checklist",
+      "Somente quando acabar a bobina",
+    ],
+    correta: 0,
+  },
+  {
+    id: "len-q8",
+    pergunta: "O que deve ser conferido antes da primeira partida?",
+    alternativas: [
+      "EPIs, proteções, bobina, solução, embalagem, selagem, pressão, ferramentas soltas, área segura e instrutor",
+      "Somente a quantidade de pacotes prontos",
+      "Apenas o nome da receita",
+    ],
+    correta: 0,
+  },
+];
