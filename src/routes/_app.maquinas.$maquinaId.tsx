@@ -259,14 +259,18 @@ function TreinoStatus({ maquina }: { maquina: import("@/data/types").Maquina }) 
 
   if (maquina.id === "mq-lencos") {
     return (
-      <div className="rounded-2xl border border-warning/30 bg-warning/10 p-4">
-        <p className="text-sm font-extrabold">Trilha de lenços em breve</p>
-        <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
-          Conteúdo técnico disponível para consulta operacional. A trilha completa de operador
-          iniciante será criada em uma próxima etapa.
+      <div className="rounded-2xl border border-primary/30 bg-primary/5 p-4">
+        <p className="text-sm font-extrabold text-primary">
+          Trilha disponível — Operador Inicial Linha Lenços Umedecidos
         </p>
-        <Button disabled className="mt-3 h-10 w-full rounded-xl text-xs font-bold">
-          Trilha de lenços em breve
+        <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+          Acesse a trilha mockada com teoria, checklist interativo, quiz com aprovação mínima de 80%
+          e avaliação prática do instrutor.
+        </p>
+        <Button asChild className="mt-3 h-10 w-full rounded-xl text-xs font-bold">
+          <Link to="/trilhas/$trilhaId" params={{ trilhaId: "operador-inicial-lencos-umedecidos" }}>
+            Abrir trilha de Lenços Umedecidos
+          </Link>
         </Button>
       </div>
     );

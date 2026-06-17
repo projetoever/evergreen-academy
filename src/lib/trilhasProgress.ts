@@ -40,6 +40,18 @@ export const CHECKLIST_PARTIDA_ITEMS_BY_TRILHA: Record<string, string[]> = {
     "Confirmar área limpa e segura.",
     "Chamar instrutor antes da primeira partida.",
   ],
+  "operador-inicial-lencos-umedecidos": [
+    "Conferir EPIs obrigatórios.",
+    "Verificar proteções e portas de segurança.",
+    "Conferir bobina de não tecido.",
+    "Conferir nível/abastecimento da solução umectante.",
+    "Conferir embalagem plástica.",
+    "Conferir temperatura de selagem.",
+    "Conferir pressão pneumática.",
+    "Verificar ausência de ferramentas soltas.",
+    "Confirmar área limpa e segura.",
+    "Chamar instrutor antes da primeira partida.",
+  ],
 };
 
 export const AVALIACAO_PRATICA_ITEMS_BY_MAQUINA: Record<string, string[]> = {
@@ -54,6 +66,19 @@ export const AVALIACAO_PRATICA_ITEMS_BY_MAQUINA: Record<string, string[]> = {
     "Sabe quando chamar instrutor.",
     "Sabe quando chamar manutenção.",
     "Não tenta intervir com máquina em movimento.",
+  ],
+  "mq-lencos": [
+    "Identifica EPIs obrigatórios.",
+    "Reconhece rolos de tração e pontos de corte.",
+    "Explica risco da área de selagem quente.",
+    "Confere bobina de não tecido.",
+    "Confere solução umectante.",
+    "Executa checklist de partida.",
+    "Reconhece defeitos comuns do pacote.",
+    "Sabe interpretar alarme comum.",
+    "Sabe quando chamar instrutor.",
+    "Sabe quando chamar manutenção.",
+    "Não tenta intervir com linha em movimento.",
   ],
 };
 

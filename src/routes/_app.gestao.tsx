@@ -74,7 +74,7 @@ function GestaoPage() {
               m.id === "mq-haina-absorvente"
                 ? "técnico disponível · trilha disponível"
                 : m.id === "mq-lencos"
-                  ? "técnico disponível · trilha pendente"
+                  ? "técnico disponível · trilha disponível"
                   : m.id === "mq-haina-fralda"
                     ? "pendente revisão"
                     : m.statusTreinamento === "disponivel"

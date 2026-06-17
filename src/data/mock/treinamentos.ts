@@ -204,6 +204,108 @@ export const TRILHA_OPERADOR_HAINA_ABSORVENTE_ETAPAS: TrilhaEtapa[] = [
   },
 ];
 
+export const TRILHA_OPERADOR_LENCOS_ETAPAS: TrilhaEtapa[] = [
+  {
+    id: "conceitos-basicos",
+    titulo: "Conceitos básicos obrigatórios",
+    tipo: "teorica",
+    status: "disponivel",
+    ordem: 1,
+    obrigatoria: true,
+    referenciaId: "manual-lencos-umedecidos",
+    descricao:
+      "Apresenta a rotina do operador iniciante na Linha Lenços Umedecidos, reforçando EPIs, comunicação com instrutor, organização da área e limites de atuação segura.",
+  },
+  {
+    id: "processo-lencos-umedecidos",
+    titulo: "Processo de fabricação de lenços umedecidos",
+    tipo: "teorica",
+    status: "disponivel",
+    ordem: 2,
+    obrigatoria: true,
+    referenciaId: "manual-lencos-umedecidos",
+    descricao:
+      "Explica o fluxo completo: alimentação da bobina de não tecido, controle de tensão, dobra do material, aplicação/dosagem da solução umectante, corte, contagem de folhas, empilhamento, inserção na embalagem, selagem e saída do pacote final.",
+  },
+  {
+    id: "linha-lencos-umedecidos",
+    titulo: "Conhecendo a Linha Lenços Umedecidos",
+    tipo: "teorica",
+    status: "disponivel",
+    ordem: 3,
+    obrigatoria: true,
+    referenciaId: "ihm-dosagem-solucao-lencos",
+    descricao:
+      "Orienta o operador a reconhecer componentes da máquina, materiais de entrada, produto de saída, parâmetros básicos, telas da IHM e defeitos comuns acompanhados durante a operação.",
+  },
+  {
+    id: "seguranca-lencos",
+    titulo: "Pontos críticos de segurança",
+    tipo: "teorica",
+    status: "disponivel",
+    ordem: 4,
+    obrigatoria: true,
+    referenciaId: "parada-segura-lencos",
+    descricao:
+      "Reforça cuidados com rolos de tração, pontos de corte, área de selagem quente, partes móveis, energia pneumática e risco de escorregamento por solução; nunca burlar proteção, nunca intervir com máquina em movimento e chamar instrutor/manutenção quando necessário.",
+  },
+  {
+    id: "checklist-partida",
+    titulo: "Checklist de partida",
+    tipo: "checklist",
+    status: "disponivel",
+    ordem: 5,
+    obrigatoria: true,
+    referenciaId: "checklist-partida-lencos",
+    descricao:
+      "Checklist interativo da Linha Lenços Umedecidos para validar EPIs, proteções, bobina, solução umectante, embalagem, selagem, pressão pneumática, área segura e chamada do instrutor antes da primeira partida.",
+  },
+  {
+    id: "alarmes-comuns",
+    titulo: "Alarmes comuns",
+    tipo: "teorica",
+    status: "disponivel",
+    ordem: 6,
+    obrigatoria: true,
+    referenciaId: "defeitos-lencos-umedecidos",
+    descricao:
+      "Mostra alarmes e desvios frequentes de tensão da bobina, dosagem de solução, corte, contagem, empilhamento, embalagem e selagem para o operador comunicar e agir dentro do padrão permitido.",
+  },
+  {
+    id: "quiz",
+    titulo: "Quiz teórico",
+    tipo: "quiz",
+    status: "disponivel",
+    ordem: 7,
+    obrigatoria: true,
+    referenciaId: "quiz-lencos-umedecidos",
+    descricao:
+      "Verifica conhecimentos mínimos sobre lenço seco, pacote vazando, temperatura de selagem, contagem de folhas, alarmes repetitivos, primeira partida e intervenção segura.",
+  },
+  {
+    id: "avaliacao-pratica",
+    titulo: "Avaliação prática",
+    tipo: "pratica",
+    status: "bloqueada",
+    ordem: 8,
+    obrigatoria: true,
+    referenciaId: "liberacao-operador-lencos",
+    descricao:
+      "Checklist prático do instrutor para observar EPIs, pontos de corte e tração, selagem quente, materiais, checklist de partida, defeitos, alarmes e comportamento seguro.",
+  },
+  {
+    id: "liberacao-final",
+    titulo: "Liberação final",
+    tipo: "liberacao",
+    status: "bloqueada",
+    ordem: 9,
+    obrigatoria: true,
+    referenciaId: "liberacao-operador-lencos",
+    descricao:
+      "Registra a liberação mockada do operador para atuação assistida/final na Linha Lenços Umedecidos após aprovação teórica e avaliação prática do instrutor.",
+  },
+];
+
 export const TRILHAS_MOCK: Trilha[] = [
   {
     id: "operador-inicial-haina-fralda-baby",
@@ -224,13 +326,13 @@ export const TRILHAS_MOCK: Trilha[] = [
     ultimaAtualizacao: "Hoje",
   },
   {
-    id: "t3",
-    titulo: "Operador Inicial — Lenços",
-    etapas: [],
+    id: "operador-inicial-lencos-umedecidos",
+    titulo: "Operador Inicial — Linha Lenços Umedecidos",
+    etapas: TRILHA_OPERADOR_LENCOS_ETAPAS,
     maquinaId: "mq-lencos",
-    status: "aguardando-avaliacao",
-    progresso: 100,
-    ultimaAtualizacao: "Ontem",
+    status: "nao-iniciado",
+    progresso: 0,
+    ultimaAtualizacao: "Hoje",
   },
   {
     id: "t4",
