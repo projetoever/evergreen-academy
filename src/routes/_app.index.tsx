@@ -4,6 +4,7 @@ import { PAPEL_LABEL } from "@/data/mock/perfis";
 import { TRILHAS_MOCK } from "@/data/mock/treinamentos";
 import { getProgressoTrilha, getStatusTrilha } from "@/lib/trilhasProgress";
 import { MAQUINAS_MOCK } from "@/data/mock/maquinas";
+import { SectionTitle } from "@/components/common/SectionTitle";
 import {
   GraduationCap,
   Factory,
@@ -15,6 +16,8 @@ import {
   Settings2,
   PlayCircle,
   Table2,
+  ChevronRight,
+  Sparkles,
 } from "lucide-react";
 
 export const Route = createFileRoute("/_app/")({
@@ -72,32 +75,36 @@ function HomePage() {
   const maquinaEmAndamento = emAndamento
     ? MAQUINAS_MOCK.find((m) => m.id === emAndamento.maquinaId)
     : undefined;
-  const trilhasIniciaisDisponiveis = TRILHAS_MOCK.filter(
+  const trilhasDisponiveis = TRILHAS_MOCK.filter(
     (t) =>
-      ["operador-inicial-haina-absorvente", "operador-inicial-lencos-umedecidos"].includes(t.id) &&
       usuario.maquinasLiberadas.includes(t.maquinaId) &&
       getStatusTrilha(t, t.etapas) === "nao-iniciado",
   );
-  const trilhaParaIniciar = trilhasIniciaisDisponiveis[0];
-  const maquinaParaIniciar = trilhaParaIniciar
-    ? MAQUINAS_MOCK.find((m) => m.id === trilhaParaIniciar.maquinaId)
-    : undefined;
 
   const isInstrutor = ["instrutor", "lider", "admin"].includes(usuario.papel);
   const isAdmin = usuario.papel === "admin";
   const isLider = ["lider", "admin"].includes(usuario.papel);
 
   return (
-    <div className="pb-4">
+    <div className="pb-8">
       {/* Saudação */}
-      <section className="bg-gradient-to-br from-primary to-primary/80 px-5 pt-5 pb-7 text-primary-foreground">
-        <p className="text-xs opacity-80">
-          {PAPEL_LABEL[usuario.papel]} • {usuario.setor}
-        </p>
-        <h1 className="mt-1 text-2xl font-bold leading-tight">
+      <section className="bg-gradient-to-br from-primary to-primary/85 px-5 pt-5 pb-8 text-primary-foreground">
+        <div className="flex items-center justify-between gap-2">
+          <p className="text-xs opacity-85">
+            {PAPEL_LABEL[usuario.papel]} • {usuario.setor}
+          </p>
+          <span className="inline-flex items-center gap-1 rounded-full bg-primary-foreground/15 px-2 py-0.5 text-[10px] font-semibold tracking-wide backdrop-blur-sm">
+            <Sparkles className="h-3 w-3" />
+            Demo V1
+          </span>
+        </div>
+        <h1 className="mt-2 text-2xl font-bold leading-tight">
           Olá, {usuario.nome.split(" ")[0]} 👋
         </h1>
         <p className="mt-1 text-sm opacity-90">Pronto para aprender hoje?</p>
+        <p className="mt-3 text-[10px] uppercase tracking-[0.12em] opacity-70">
+          Evergreen Academy
+        </p>
       </section>
 
       {/* Continuar treinamento */}
@@ -106,7 +113,7 @@ function HomePage() {
           <Link
             to="/trilhas/$trilhaId"
             params={{ trilhaId: emAndamento.id }}
-            className="flex items-center gap-3 rounded-2xl border border-border bg-card p-3 shadow-sm transition active:scale-[0.99]"
+            className="flex items-center gap-3 rounded-2xl border border-accent/40 bg-card p-3.5 shadow-md ring-1 ring-accent/20 transition active:scale-[0.99]"
           >
             <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-accent/20 text-accent-foreground">
               <PlayCircle className="h-6 w-6" />
@@ -123,56 +130,69 @@ function HomePage() {
                 />
               </div>
             </div>
+            <ChevronRight className="h-5 w-5 shrink-0 text-muted-foreground" />
           </Link>
         </div>
       )}
 
-      {trilhaParaIniciar && !emAndamento && (
-        <div className="-mt-5 px-4">
-          <Link
-            to="/trilhas/$trilhaId"
-            params={{ trilhaId: trilhaParaIniciar.id }}
-            className="flex items-center gap-3 rounded-2xl border border-border bg-card p-3 shadow-sm transition active:scale-[0.99]"
-          >
-            <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-accent/20 text-accent-foreground">
-              <PlayCircle className="h-6 w-6" />
-            </div>
-            <div className="min-w-0 flex-1">
-              <p className="text-[11px] font-semibold uppercase tracking-wide text-accent-foreground">
-                Iniciar treinamento
-              </p>
-              <p className="truncate text-sm font-bold text-foreground">
-                {trilhaParaIniciar.titulo}
-              </p>
-              <p className="mt-1 text-[11px] text-muted-foreground">
-                {maquinaParaIniciar?.nome ?? "Trilha disponível"}
-              </p>
-            </div>
-          </Link>
+      {/* Trilhas disponíveis */}
+      {trilhasDisponiveis.length > 0 && (
+        <div>
+          <SectionTitle title="Trilhas disponíveis" />
+          <div className="space-y-2.5 px-4">
+            {trilhasDisponiveis.map((t) => {
+              const maquina = MAQUINAS_MOCK.find((m) => m.id === t.maquinaId);
+              return (
+                <Link
+                  key={t.id}
+                  to="/trilhas/$trilhaId"
+                  params={{ trilhaId: t.id }}
+                  className="flex items-center gap-3 rounded-2xl border border-border/70 bg-card p-3.5 shadow-sm transition active:scale-[0.99]"
+                >
+                  <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-primary/10 text-primary">
+                    <Factory className="h-5 w-5" />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <p className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
+                      Iniciar treinamento
+                    </p>
+                    <p className="truncate text-sm font-bold text-foreground">{t.titulo}</p>
+                    {maquina && (
+                      <p className="truncate text-[11px] text-muted-foreground">{maquina.nome}</p>
+                    )}
+                  </div>
+                  <ChevronRight className="h-5 w-5 shrink-0 text-muted-foreground" />
+                </Link>
+              );
+            })}
+          </div>
         </div>
       )}
 
       {/* Líder: visão de equipe */}
       {isLider && (
-        <div className="mt-4 px-4">
-          <div className="rounded-2xl border border-primary/20 bg-primary/5 p-3">
-            <p className="text-[11px] font-semibold uppercase tracking-wide text-primary">Equipe</p>
-            <div className="mt-1 grid grid-cols-3 gap-2 text-center">
-              <Stat label="Em treino" value="3" />
-              <Stat label="Aguardando" value="1" />
-              <Stat label="Aprovados" value="12" />
+        <div>
+          <SectionTitle title="Equipe" />
+          <div className="px-4">
+            <div className="rounded-2xl border border-primary/20 bg-primary/5 p-4">
+              <div className="grid grid-cols-3 gap-2 text-center">
+                <Stat label="Em treino" value="3" />
+                <Stat label="Aguardando" value="1" />
+                <Stat label="Aprovados" value="12" />
+              </div>
             </div>
           </div>
         </div>
       )}
 
-      {/* Grid de cards */}
-      <div className="mt-5 grid grid-cols-2 gap-3 px-4">
+      {/* Explorar */}
+      <SectionTitle title="Explorar" />
+      <div className="grid grid-cols-2 gap-3 px-4">
         {cards.map((c) => (
           <Link
             key={c.to}
             to={c.to}
-            className="group flex h-32 flex-col justify-between rounded-2xl border border-border bg-card p-3 shadow-sm transition active:scale-[0.98]"
+            className="group flex h-32 flex-col justify-between rounded-2xl border border-border/70 bg-card p-3.5 shadow-sm transition active:scale-[0.98]"
           >
             <span className={`grid h-10 w-10 place-items-center rounded-xl ${c.cor}`}>
               <c.icon className="h-5 w-5" />
@@ -183,52 +203,60 @@ function HomePage() {
             </div>
           </Link>
         ))}
-
-        {isInstrutor && (
-          <Link
-            to="/instrutor"
-            className="flex h-32 flex-col justify-between rounded-2xl border border-primary/30 bg-primary/5 p-3 shadow-sm transition active:scale-[0.98]"
-          >
-            <span className="grid h-10 w-10 place-items-center rounded-xl bg-primary text-primary-foreground">
-              <ShieldCheck className="h-5 w-5" />
-            </span>
-            <div>
-              <p className="text-sm font-bold leading-tight">Área do instrutor</p>
-              <p className="mt-0.5 text-[11px] text-muted-foreground">Avaliar e liberar</p>
-            </div>
-          </Link>
-        )}
-
-        {isLider && (
-          <Link
-            to="/matriz-competencia"
-            className="flex h-32 flex-col justify-between rounded-2xl border border-success/30 bg-success/10 p-3 shadow-sm transition active:scale-[0.98]"
-          >
-            <span className="grid h-10 w-10 place-items-center rounded-xl bg-success text-success-foreground">
-              <Table2 className="h-5 w-5" />
-            </span>
-            <div>
-              <p className="text-sm font-bold leading-tight">Matriz de competência</p>
-              <p className="mt-0.5 text-[11px] text-muted-foreground">Status por operador</p>
-            </div>
-          </Link>
-        )}
-
-        {isAdmin && (
-          <Link
-            to="/gestao"
-            className="flex h-32 flex-col justify-between rounded-2xl border border-warning/40 bg-warning/10 p-3 shadow-sm transition active:scale-[0.98]"
-          >
-            <span className="grid h-10 w-10 place-items-center rounded-xl bg-warning text-warning-foreground">
-              <Settings2 className="h-5 w-5" />
-            </span>
-            <div>
-              <p className="text-sm font-bold leading-tight">Gestão</p>
-              <p className="mt-0.5 text-[11px] text-muted-foreground">Conteúdo e usuários</p>
-            </div>
-          </Link>
-        )}
       </div>
+
+      {/* Ferramentas (por papel) */}
+      {(isInstrutor || isLider || isAdmin) && (
+        <div>
+          <SectionTitle title="Ferramentas" />
+          <div className="grid grid-cols-2 gap-3 px-4">
+            {isInstrutor && (
+              <Link
+                to="/instrutor"
+                className="flex h-32 flex-col justify-between rounded-2xl border border-primary/30 bg-primary/5 p-3.5 shadow-sm transition active:scale-[0.98]"
+              >
+                <span className="grid h-10 w-10 place-items-center rounded-xl bg-primary text-primary-foreground">
+                  <ShieldCheck className="h-5 w-5" />
+                </span>
+                <div>
+                  <p className="text-sm font-bold leading-tight">Área do instrutor</p>
+                  <p className="mt-0.5 text-[11px] text-muted-foreground">Avaliar e liberar</p>
+                </div>
+              </Link>
+            )}
+
+            {isLider && (
+              <Link
+                to="/matriz-competencia"
+                className="flex h-32 flex-col justify-between rounded-2xl border border-success/30 bg-success/10 p-3.5 shadow-sm transition active:scale-[0.98]"
+              >
+                <span className="grid h-10 w-10 place-items-center rounded-xl bg-success text-success-foreground">
+                  <Table2 className="h-5 w-5" />
+                </span>
+                <div>
+                  <p className="text-sm font-bold leading-tight">Matriz de competência</p>
+                  <p className="mt-0.5 text-[11px] text-muted-foreground">Status por operador</p>
+                </div>
+              </Link>
+            )}
+
+            {isAdmin && (
+              <Link
+                to="/gestao"
+                className="flex h-32 flex-col justify-between rounded-2xl border border-warning/40 bg-warning/10 p-3.5 shadow-sm transition active:scale-[0.98]"
+              >
+                <span className="grid h-10 w-10 place-items-center rounded-xl bg-warning text-warning-foreground">
+                  <Settings2 className="h-5 w-5" />
+                </span>
+                <div>
+                  <p className="text-sm font-bold leading-tight">Gestão</p>
+                  <p className="mt-0.5 text-[11px] text-muted-foreground">Conteúdo e usuários</p>
+                </div>
+              </Link>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
