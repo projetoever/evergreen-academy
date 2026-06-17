@@ -1,7 +1,7 @@
 {
   "name": "Evergreen Academy",
   "short_name": "Evergreen",
-  "description": "Formação operacional para funcionários Evergreen — máquinas, processos e segurança.",
+  "description": "Plataforma mobile de formação operacional para máquinas, trilhas, checklists, avaliações e matriz de competência.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

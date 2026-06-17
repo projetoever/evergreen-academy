@@ -94,7 +94,9 @@ function TrilhaPage() {
   const progresso = getProgressoTrilha(trilha, trilha.etapas);
   const status = getStatusTrilha(trilha, trilha.etapas);
   const teoricasConcluidas = areEtapasTeoricasConcluidas(trilha.etapas, progress);
-  const proxima = trilha.etapas.find((etapa) => progress.etapas[etapa.id] !== "concluida");
+  const proxima = trilha.etapas.find(
+    (etapa: TrilhaEtapa) => progress.etapas[etapa.id] !== "concluida",
+  );
 
   function handleMarcarVisto(etapaId: string) {
     markEtapaVista(trilha.id, etapaId);
@@ -145,7 +147,7 @@ function TrilhaPage() {
         </section>
 
         <section className="space-y-0 pl-2">
-          {trilha.etapas.map((etapa) => {
+          {trilha.etapas.map((etapa: TrilhaEtapa) => {
             const visualStatus = getEtapaStatus(etapa);
             const bloqueada = visualStatus === "bloqueada";
             const concluida = progress.etapas[etapa.id] === "concluida";
