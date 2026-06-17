@@ -170,34 +170,18 @@ function MaquinaDetalhe() {
 
         <TabsContent value="treino" className="mt-3 space-y-3 px-4">
           <Section title="Módulos" items={maquina.modulos} numbered />
-          {maquina.id === "mq-haina-absorvente" && (
-            <div className="rounded-2xl border border-primary/30 bg-primary/5 p-4">
-              <p className="text-sm font-extrabold text-primary">
-                Trilha disponível — Operador Inicial Haina Absorvente
-              </p>
-              <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
-                Acesse a trilha mockada com teoria, checklist interativo, quiz com aprovação mínima
-                de 80% e avaliação prática do instrutor.
-              </p>
-              <Button asChild className="mt-3 h-10 w-full rounded-xl text-xs font-bold">
-                <Link
-                  to="/trilhas/$trilhaId"
-                  params={{ trilhaId: "operador-inicial-haina-absorvente" }}
-                >
-                  Abrir trilha da Haina Absorvente
-                </Link>
-              </Button>
-            </div>
-          )}
+          <TreinoStatus maquina={maquina} />
           {maquina.perguntasFrequentes?.map((f) => (
             <InfoCard key={f.pergunta} title={f.pergunta} icon={<HelpCircle className="h-4 w-4" />}>
               {f.resposta}
             </InfoCard>
           ))}
-          <Button className="h-12 w-full rounded-xl text-sm font-bold">
-            <PlayCircle className="mr-2 h-5 w-5" />
-            Iniciar treinamento
-          </Button>
+          {maquina.id !== "mq-lencos" && (
+            <Button className="h-12 w-full rounded-xl text-sm font-bold">
+              <PlayCircle className="mr-2 h-5 w-5" />
+              Iniciar treinamento
+            </Button>
+          )}
         </TabsContent>
 
         <TabsContent value="checklist" className="mt-3 px-4">
@@ -251,6 +235,44 @@ function MaquinaDetalhe() {
       </Tabs>
     </div>
   );
+}
+
+function TreinoStatus({ maquina }: { maquina: import("@/data/types").Maquina }) {
+  if (maquina.id === "mq-haina-absorvente") {
+    return (
+      <div className="rounded-2xl border border-primary/30 bg-primary/5 p-4">
+        <p className="text-sm font-extrabold text-primary">
+          Trilha disponível — Operador Inicial Haina Absorvente
+        </p>
+        <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+          Acesse a trilha mockada com teoria, checklist interativo, quiz com aprovação mínima de 80%
+          e avaliação prática do instrutor.
+        </p>
+        <Button asChild className="mt-3 h-10 w-full rounded-xl text-xs font-bold">
+          <Link to="/trilhas/$trilhaId" params={{ trilhaId: "operador-inicial-haina-absorvente" }}>
+            Abrir trilha da Haina Absorvente
+          </Link>
+        </Button>
+      </div>
+    );
+  }
+
+  if (maquina.id === "mq-lencos") {
+    return (
+      <div className="rounded-2xl border border-warning/30 bg-warning/10 p-4">
+        <p className="text-sm font-extrabold">Trilha de lenços em breve</p>
+        <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+          Conteúdo técnico disponível para consulta operacional. A trilha completa de operador
+          iniciante será criada em uma próxima etapa.
+        </p>
+        <Button disabled className="mt-3 h-10 w-full rounded-xl text-xs font-bold">
+          Trilha de lenços em breve
+        </Button>
+      </div>
+    );
+  }
+
+  return null;
 }
 
 function DataPill({
