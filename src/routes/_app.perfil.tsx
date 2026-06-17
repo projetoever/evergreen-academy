@@ -4,7 +4,9 @@ import { PAPEL_LABEL } from "@/data/mock/perfis";
 import { MAQUINAS_MOCK } from "@/data/mock/maquinas";
 import { TRILHAS_MOCK } from "@/data/mock/treinamentos";
 import { PageHeader } from "@/components/common/PageHeader";
-import { Award, Briefcase, MapPin } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { resetDemoData } from "@/lib/trilhasProgress";
+import { Award, Briefcase, MapPin, RotateCcw } from "lucide-react";
 
 export const Route = createFileRoute("/_app/perfil")({
   component: PerfilPage,
@@ -76,6 +78,29 @@ function PerfilPage() {
         <p className="mt-1 text-xs text-muted-foreground">
           {pendentes.length} em andamento ou aguardando
         </p>
+      </section>
+
+      {/* Reset demonstração */}
+      <section className="mx-4 mt-3 rounded-2xl border border-danger/30 bg-danger/10 p-4">
+        <div className="flex items-center gap-2">
+          <RotateCcw className="h-4 w-4" />
+          <p className="text-sm font-bold">Resetar progresso de demonstração</p>
+        </div>
+        <p className="mt-2 text-xs text-muted-foreground">
+          Limpa trilhas, quiz, checklist e avaliação do instrutor salvos neste dispositivo.
+        </p>
+        <Button
+          variant="destructive"
+          className="mt-3 h-10 w-full rounded-xl"
+          onClick={() => {
+            if (window.confirm("Resetar progresso de demonstração?")) {
+              resetDemoData();
+              window.location.reload();
+            }
+          }}
+        >
+          Resetar progresso de demonstração
+        </Button>
       </section>
 
       {/* Certificações */}

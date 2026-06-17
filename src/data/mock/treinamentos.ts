@@ -9,6 +9,8 @@ export const TRILHA_OPERADOR_HAINA_ETAPAS: TrilhaEtapa[] = [
     ordem: 1,
     obrigatoria: true,
     referenciaId: "aula-conceitos",
+    descricao:
+      "Apresenta a rotina da linha, os papéis do operador iniciante e os combinados mínimos para acompanhar a Haina com segurança antes de tocar no equipamento.",
   },
   {
     id: "processo-fraldas",
@@ -18,6 +20,8 @@ export const TRILHA_OPERADOR_HAINA_ETAPAS: TrilhaEtapa[] = [
     ordem: 2,
     obrigatoria: true,
     referenciaId: "processo-fraldas",
+    descricao:
+      "Mostra o fluxo de fabricação da fralda, da alimentação de materiais ao corte e empacotamento, para o operador entender onde sua atividade impacta qualidade e ritmo.",
   },
   {
     id: "haina-fralda-baby",
@@ -27,6 +31,8 @@ export const TRILHA_OPERADOR_HAINA_ETAPAS: TrilhaEtapa[] = [
     ordem: 3,
     obrigatoria: true,
     referenciaId: "mq-haina-fralda",
+    descricao:
+      "Localiza os principais conjuntos da Haina Fralda Baby, pontos de comando, áreas de acesso e referências MQ-001 usadas durante o treinamento.",
   },
   {
     id: "seguranca",
@@ -36,6 +42,8 @@ export const TRILHA_OPERADOR_HAINA_ETAPAS: TrilhaEtapa[] = [
     ordem: 4,
     obrigatoria: true,
     referenciaId: "seguranca-haina",
+    descricao:
+      "Ensina a reconhecer proteções, portas, pontos de esmagamento, hotmelt e paradas de emergência antes de qualquer intervenção na máquina.",
   },
   {
     id: "checklist-partida",
@@ -45,6 +53,8 @@ export const TRILHA_OPERADOR_HAINA_ETAPAS: TrilhaEtapa[] = [
     ordem: 5,
     obrigatoria: true,
     referenciaId: "checklist-haina",
+    descricao:
+      "Guia o operador iniciante por uma verificação assistida de EPIs, proteções, materiais, ar, hotmelt e organização da área antes da primeira partida.",
   },
   {
     id: "alarmes-comuns",
@@ -54,6 +64,8 @@ export const TRILHA_OPERADOR_HAINA_ETAPAS: TrilhaEtapa[] = [
     ordem: 6,
     obrigatoria: true,
     referenciaId: "alarmes-haina",
+    descricao:
+      "Explica alarmes frequentes de alimentação, portas, pressão de ar e temperatura para o operador saber estabilizar a linha ou chamar apoio.",
   },
   {
     id: "quiz",
@@ -63,6 +75,8 @@ export const TRILHA_OPERADOR_HAINA_ETAPAS: TrilhaEtapa[] = [
     ordem: 7,
     obrigatoria: true,
     referenciaId: "quiz-haina",
+    descricao:
+      "Confirma se o operador entendeu ciclo da máquina, segurança, checklist e alarmes antes de avançar para a prática acompanhada.",
   },
   {
     id: "avaliacao-pratica",
@@ -72,6 +86,8 @@ export const TRILHA_OPERADOR_HAINA_ETAPAS: TrilhaEtapa[] = [
     ordem: 8,
     obrigatoria: true,
     referenciaId: "avaliacao-pratica-haina",
+    descricao:
+      "Permite ao instrutor observar a execução real do checklist, reação a alarmes e comunicação do operador no chão de fábrica.",
   },
   {
     id: "liberacao-final",
@@ -81,6 +97,8 @@ export const TRILHA_OPERADOR_HAINA_ETAPAS: TrilhaEtapa[] = [
     ordem: 9,
     obrigatoria: true,
     referenciaId: "liberacao-haina",
+    descricao:
+      "Registra a liberação mockada do operador para atuação assistida/final na Haina Fralda Baby após aprovação prática.",
   },
 ];
 

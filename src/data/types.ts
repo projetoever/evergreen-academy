@@ -85,7 +85,13 @@ export interface Maquina {
 
 export type TipoTrilhaEtapa = "teorica" | "checklist" | "quiz" | "pratica" | "liberacao";
 
-export type StatusTrilhaEtapa = "bloqueada" | "disponivel" | "concluida";
+export type StatusTrilhaEtapa =
+  | "bloqueada"
+  | "disponivel"
+  | "em-andamento"
+  | "concluida"
+  | "aguardando-avaliacao"
+  | "aprovada";
 
 export interface TrilhaEtapa {
   id: string;
@@ -95,6 +101,7 @@ export interface TrilhaEtapa {
   ordem: number;
   obrigatoria: boolean;
   referenciaId: string;
+  descricao: string;
 }
 
 export type StatusTrilha =
@@ -134,4 +141,17 @@ export interface ItemBiblioteca {
   id: string;
   titulo: string;
   tipo: DocumentoTecnico["tipo"];
+  descricao: string;
+  maquinaId?: string;
+  status: "mock";
+}
+
+export interface MatrizCompetenciaItem {
+  id: string;
+  funcionario: string;
+  maquinaId: string;
+  status: StatusTrilha;
+  nivel: Nivel;
+  ultimaAtualizacao: string;
+  proximaAcao: string;
 }

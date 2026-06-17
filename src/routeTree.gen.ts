@@ -14,6 +14,7 @@ import { Route as AppIndexRouteImport } from './routes/_app.index'
 import { Route as MCodigoRouteImport } from './routes/m.$codigo'
 import { Route as AppPerfilRouteImport } from './routes/_app.perfil'
 import { Route as AppMeusTreinamentosRouteImport } from './routes/_app.meus-treinamentos'
+import { Route as AppMatrizCompetenciaRouteImport } from './routes/_app.matriz-competencia'
 import { Route as AppInstrutorRouteImport } from './routes/_app.instrutor'
 import { Route as AppGestaoRouteImport } from './routes/_app.gestao'
 import { Route as AppBibliotecaRouteImport } from './routes/_app.biblioteca'
@@ -48,6 +49,11 @@ const AppPerfilRoute = AppPerfilRouteImport.update({
 const AppMeusTreinamentosRoute = AppMeusTreinamentosRouteImport.update({
   id: '/meus-treinamentos',
   path: '/meus-treinamentos',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppMatrizCompetenciaRoute = AppMatrizCompetenciaRouteImport.update({
+  id: '/matriz-competencia',
+  path: '/matriz-competencia',
   getParentRoute: () => AppRoute,
 } as any)
 const AppInstrutorRoute = AppInstrutorRouteImport.update({
@@ -111,6 +117,7 @@ export interface FileRoutesByFullPath {
   '/biblioteca': typeof AppBibliotecaRoute
   '/gestao': typeof AppGestaoRoute
   '/instrutor': typeof AppInstrutorRoute
+  '/matriz-competencia': typeof AppMatrizCompetenciaRoute
   '/meus-treinamentos': typeof AppMeusTreinamentosRoute
   '/perfil': typeof AppPerfilRoute
   '/m/$codigo': typeof MCodigoRoute
@@ -127,6 +134,7 @@ export interface FileRoutesByTo {
   '/biblioteca': typeof AppBibliotecaRoute
   '/gestao': typeof AppGestaoRoute
   '/instrutor': typeof AppInstrutorRoute
+  '/matriz-competencia': typeof AppMatrizCompetenciaRoute
   '/meus-treinamentos': typeof AppMeusTreinamentosRoute
   '/perfil': typeof AppPerfilRoute
   '/m/$codigo': typeof MCodigoRoute
@@ -146,6 +154,7 @@ export interface FileRoutesById {
   '/_app/biblioteca': typeof AppBibliotecaRoute
   '/_app/gestao': typeof AppGestaoRoute
   '/_app/instrutor': typeof AppInstrutorRoute
+  '/_app/matriz-competencia': typeof AppMatrizCompetenciaRoute
   '/_app/meus-treinamentos': typeof AppMeusTreinamentosRoute
   '/_app/perfil': typeof AppPerfilRoute
   '/m/$codigo': typeof MCodigoRoute
@@ -166,6 +175,7 @@ export interface FileRouteTypes {
     | '/biblioteca'
     | '/gestao'
     | '/instrutor'
+    | '/matriz-competencia'
     | '/meus-treinamentos'
     | '/perfil'
     | '/m/$codigo'
@@ -182,6 +192,7 @@ export interface FileRouteTypes {
     | '/biblioteca'
     | '/gestao'
     | '/instrutor'
+    | '/matriz-competencia'
     | '/meus-treinamentos'
     | '/perfil'
     | '/m/$codigo'
@@ -200,6 +211,7 @@ export interface FileRouteTypes {
     | '/_app/biblioteca'
     | '/_app/gestao'
     | '/_app/instrutor'
+    | '/_app/matriz-competencia'
     | '/_app/meus-treinamentos'
     | '/_app/perfil'
     | '/m/$codigo'
@@ -254,6 +266,13 @@ declare module '@tanstack/react-router' {
       path: '/meus-treinamentos'
       fullPath: '/meus-treinamentos'
       preLoaderRoute: typeof AppMeusTreinamentosRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/matriz-competencia': {
+      id: '/_app/matriz-competencia'
+      path: '/matriz-competencia'
+      fullPath: '/matriz-competencia'
+      preLoaderRoute: typeof AppMatrizCompetenciaRouteImport
       parentRoute: typeof AppRoute
     }
     '/_app/instrutor': {
@@ -340,6 +359,7 @@ interface AppRouteChildren {
   AppBibliotecaRoute: typeof AppBibliotecaRoute
   AppGestaoRoute: typeof AppGestaoRoute
   AppInstrutorRoute: typeof AppInstrutorRoute
+  AppMatrizCompetenciaRoute: typeof AppMatrizCompetenciaRoute
   AppMeusTreinamentosRoute: typeof AppMeusTreinamentosRoute
   AppPerfilRoute: typeof AppPerfilRoute
   AppIndexRoute: typeof AppIndexRoute
@@ -357,6 +377,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppBibliotecaRoute: AppBibliotecaRoute,
   AppGestaoRoute: AppGestaoRoute,
   AppInstrutorRoute: AppInstrutorRoute,
+  AppMatrizCompetenciaRoute: AppMatrizCompetenciaRoute,
   AppMeusTreinamentosRoute: AppMeusTreinamentosRoute,
   AppPerfilRoute: AppPerfilRoute,
   AppIndexRoute: AppIndexRoute,
