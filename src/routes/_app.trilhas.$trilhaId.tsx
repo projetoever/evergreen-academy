@@ -12,13 +12,13 @@ import {
 
 import { PageHeader } from "@/components/common/PageHeader";
 import { Button } from "@/components/ui/button";
-import { QUIZ_MOCK } from "@/data/mock/avaliacoes";
+import { QUIZ_HAINA_ABSORVENTE_MOCK, QUIZ_MOCK } from "@/data/mock/avaliacoes";
 import { MAQUINAS_MOCK } from "@/data/mock/maquinas";
 import { STATUS_LABEL, TRILHAS_MOCK } from "@/data/mock/treinamentos";
 import type { StatusTrilhaEtapa, TrilhaEtapa } from "@/data/types";
 import {
-  CHECKLIST_PARTIDA_ITEMS,
   areEtapasTeoricasConcluidas,
+  getChecklistPartidaItems,
   getProgressoTrilha,
   getStatusTrilha,
   getTrilhaProgress,
@@ -62,7 +62,14 @@ const linksSecoesHaina: Record<string, Array<{ label: string; tab: string }>> = 
   "alarmes-comuns": [{ label: "Ver alarmes", tab: "alarmes" }],
   seguranca: [{ label: "Ver pontos de segurança", tab: "seguranca" }],
   "checklist-partida": [{ label: "Ver checklist da máquina", tab: "checklist" }],
-  "processo-fraldas": [{ label: "Ver defeitos comuns", tab: "defeitos" }],
+  "processo-fraldas": [{ label: "Ver processo de fraldas", tab: "defeitos" }],
+  "processo-absorventes": [{ label: "Ver defeitos comuns", tab: "defeitos" }],
+  "haina-absorvente": [
+    { label: "Ver componentes da máquina", tab: "componentes" },
+    { label: "Ver parâmetros básicos", tab: "parametros" },
+    { label: "Ver IHM", tab: "ihm" },
+  ],
+  "seguranca-absorvente": [{ label: "Ver pontos de segurança", tab: "seguranca" }],
 };
 
 function TrilhaPage() {
@@ -222,8 +229,9 @@ function TrilhaPage() {
 
 function ChecklistPartida({ trilhaId, onChange }: { trilhaId: string; onChange: () => void }) {
   const [items, setItems] = useState(() => loadChecklistPartida(trilhaId));
-  const done = CHECKLIST_PARTIDA_ITEMS.filter((item) => items[item]).length;
-  const pct = Math.round((done / CHECKLIST_PARTIDA_ITEMS.length) * 100);
+  const checklistItems = getChecklistPartidaItems(trilhaId);
+  const done = checklistItems.filter((item) => items[item]).length;
+  const pct = Math.round((done / checklistItems.length) * 100);
   return (
     <div className="mt-3 rounded-xl bg-muted/40 p-3">
       <div className="mb-3 flex items-center justify-between text-xs font-bold">
@@ -231,7 +239,7 @@ function ChecklistPartida({ trilhaId, onChange }: { trilhaId: string; onChange: 
         <span>{pct}%</span>
       </div>
       <div className="space-y-2">
-        {CHECKLIST_PARTIDA_ITEMS.map((item) => (
+        {checklistItems.map((item) => (
           <label
             key={item}
             className="flex items-start gap-2 rounded-lg border border-border bg-background p-2 text-xs"
@@ -254,14 +262,16 @@ function ChecklistPartida({ trilhaId, onChange }: { trilhaId: string; onChange: 
 }
 
 function TrilhaQuiz({ trilhaId, onSaved }: { trilhaId: string; onSaved: () => void }) {
+  const quizPerguntas =
+    trilhaId === "operador-inicial-haina-absorvente" ? QUIZ_HAINA_ABSORVENTE_MOCK : QUIZ_MOCK;
   const saved = getTrilhaProgress(trilhaId).quiz;
   const [respostas, setRespostas] = useState<Record<string, number>>({});
   const [resultado, setResultado] = useState(saved ?? null);
 
   function finalizarQuiz() {
-    const acertos = QUIZ_MOCK.filter((q) => respostas[q.id] === q.correta).length;
-    const nota = Math.round((acertos / QUIZ_MOCK.length) * 100);
-    const quiz = { acertos, total: QUIZ_MOCK.length, nota, aprovado: nota >= 80 };
+    const acertos = quizPerguntas.filter((q) => respostas[q.id] === q.correta).length;
+    const nota = Math.round((acertos / quizPerguntas.length) * 100);
+    const quiz = { acertos, total: quizPerguntas.length, nota, aprovado: nota >= 80 };
     saveQuizResultado(trilhaId, quiz);
     setResultado(quiz);
     onSaved();
@@ -311,7 +321,7 @@ function TrilhaQuiz({ trilhaId, onSaved }: { trilhaId: string; onSaved: () => vo
         Aprovação mínima: 80%.
       </div>
       <div className="space-y-3">
-        {QUIZ_MOCK.map((q, index) => (
+        {quizPerguntas.map((q, index) => (
           <div key={q.id}>
             <p className="text-xs font-bold">
               {index + 1}. {q.pergunta}
@@ -333,7 +343,7 @@ function TrilhaQuiz({ trilhaId, onSaved }: { trilhaId: string; onSaved: () => vo
       </div>
       <Button
         className="mt-3 h-11 w-full rounded-xl font-bold"
-        disabled={Object.keys(respostas).length < QUIZ_MOCK.length}
+        disabled={Object.keys(respostas).length < quizPerguntas.length}
         onClick={finalizarQuiz}
       >
         <ClipboardCheck className="mr-2 h-4 w-4" />

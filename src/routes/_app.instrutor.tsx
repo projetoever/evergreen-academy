@@ -7,7 +7,7 @@ import { MAQUINAS_MOCK } from "@/data/mock/maquinas";
 import { STATUS_LABEL } from "@/data/mock/treinamentos";
 import type { StatusTrilha } from "@/data/types";
 import {
-  AVALIACAO_PRATICA_ITEMS,
+  getAvaliacaoPraticaItems,
   isAvaliacaoPraticaAprovada,
   loadAvaliacaoPratica,
   loadFuncionariosInstrutor,
@@ -47,7 +47,8 @@ function InstrutorPage() {
         {funcionarios.map((f) => {
           const maq = MAQUINAS_MOCK.find((m) => m.id === f.maquinaId);
           const avaliacao = loadAvaliacaoPratica(f.id);
-          const aprovada = isAvaliacaoPraticaAprovada(avaliacao);
+          const avaliacaoItems = getAvaliacaoPraticaItems(f.maquinaId);
+          const aprovada = isAvaliacaoPraticaAprovada(avaliacao, f.maquinaId);
           return (
             <div key={f.id} className="rounded-2xl border border-border bg-card p-3 shadow-sm">
               <div className="flex items-start gap-3">
@@ -70,7 +71,7 @@ function InstrutorPage() {
               <div className="mt-3 rounded-xl bg-muted/40 p-3">
                 <p className="text-xs font-extrabold">Checklist de avaliação prática</p>
                 <div className="mt-2 space-y-2">
-                  {AVALIACAO_PRATICA_ITEMS.map((item) => (
+                  {avaliacaoItems.map((item) => (
                     <label
                       key={item}
                       className="flex items-start gap-2 rounded-lg border border-border bg-background p-2 text-xs"

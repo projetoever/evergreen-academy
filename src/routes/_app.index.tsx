@@ -72,6 +72,8 @@ function HomePage() {
   const maquinaEmAndamento = emAndamento
     ? MAQUINAS_MOCK.find((m) => m.id === emAndamento.maquinaId)
     : undefined;
+  const trilhaAbsorvente = TRILHAS_MOCK.find((t) => t.id === "operador-inicial-haina-absorvente");
+  const usuarioPodeIniciarAbsorvente = usuario.maquinasLiberadas.includes("mq-haina-absorvente");
 
   const isInstrutor = ["instrutor", "lider", "admin"].includes(usuario.papel);
   const isAdmin = usuario.papel === "admin";
@@ -112,6 +114,29 @@ function HomePage() {
                   style={{ width: `${getProgressoTrilha(emAndamento, emAndamento.etapas)}%` }}
                 />
               </div>
+            </div>
+          </Link>
+        </div>
+      )}
+
+      {usuarioPodeIniciarAbsorvente && trilhaAbsorvente && !emAndamento && (
+        <div className="-mt-5 px-4">
+          <Link
+            to="/trilhas/$trilhaId"
+            params={{ trilhaId: trilhaAbsorvente.id }}
+            className="flex items-center gap-3 rounded-2xl border border-border bg-card p-3 shadow-sm transition active:scale-[0.99]"
+          >
+            <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-accent/20 text-accent-foreground">
+              <PlayCircle className="h-6 w-6" />
+            </div>
+            <div className="min-w-0 flex-1">
+              <p className="text-[11px] font-semibold uppercase tracking-wide text-accent-foreground">
+                Iniciar treinamento
+              </p>
+              <p className="truncate text-sm font-bold text-foreground">
+                {trilhaAbsorvente.titulo}
+              </p>
+              <p className="mt-1 text-[11px] text-muted-foreground">Haina Absorvente disponível</p>
             </div>
           </Link>
         </div>

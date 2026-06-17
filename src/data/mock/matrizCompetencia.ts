@@ -14,10 +14,10 @@ export const MATRIZ_COMPETENCIA_MOCK: MatrizCompetenciaItem[] = [
     id: "mc2",
     funcionario: "Beatriz Lima",
     maquinaId: "mq-haina-absorvente",
-    status: "aguardando-avaliacao",
+    status: "em-andamento",
     nivel: "basico",
-    ultimaAtualizacao: "15/06/2026",
-    proximaAcao: "Realizar avaliação prática com instrutor",
+    ultimaAtualizacao: "17/06/2026",
+    proximaAcao: "Concluir trilha Operador Inicial — Haina Absorvente",
   },
   {
     id: "mc3",

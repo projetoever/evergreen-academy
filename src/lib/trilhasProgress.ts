@@ -6,7 +6,7 @@ const FUNCIONARIOS_KEY = "evergreen.instrutor.funcionarios.v1";
 const CHECKLIST_KEY = "evergreen.trilhas.checklist.v1";
 const INSTRUTOR_CHECKLIST_KEY = "evergreen.instrutor.avaliacao.v1";
 
-export const CHECKLIST_PARTIDA_ITEMS = [
+export const CHECKLIST_PARTIDA_ITEMS_DEFAULT = [
   "Conferir EPIs obrigatórios.",
   "Verificar proteção e portas de segurança.",
   "Conferir bobinas principais.",
@@ -17,7 +17,7 @@ export const CHECKLIST_PARTIDA_ITEMS = [
   "Chamar instrutor antes da primeira partida.",
 ];
 
-export const AVALIACAO_PRATICA_ITEMS = [
+export const AVALIACAO_PRATICA_ITEMS_DEFAULT = [
   "Identifica EPIs obrigatórios.",
   "Explica parada de emergência.",
   "Reconhece pontos de esmagamento.",
@@ -25,6 +25,47 @@ export const AVALIACAO_PRATICA_ITEMS = [
   "Interpreta alarme comum.",
   "Sabe quando chamar manutenção/líder.",
 ];
+
+export const CHECKLIST_PARTIDA_ITEMS_BY_TRILHA: Record<string, string[]> = {
+  "operador-inicial-haina-absorvente": [
+    "Conferir EPIs obrigatórios.",
+    "Verificar proteções e portas de segurança.",
+    "Conferir bobina de cobertura superior.",
+    "Conferir filme inferior.",
+    "Conferir papel release.",
+    "Conferir embalagem individual.",
+    "Conferir pressão pneumática.",
+    "Conferir temperatura do hotmelt.",
+    "Verificar ausência de ferramentas soltas.",
+    "Confirmar área limpa e segura.",
+    "Chamar instrutor antes da primeira partida.",
+  ],
+};
+
+export const AVALIACAO_PRATICA_ITEMS_BY_MAQUINA: Record<string, string[]> = {
+  "mq-haina-absorvente": [
+    "Identifica EPIs obrigatórios.",
+    "Reconhece pontos de corte e esmagamento.",
+    "Explica função da parada de emergência.",
+    "Confere materiais principais.",
+    "Executa checklist de partida.",
+    "Reconhece defeitos comuns do absorvente.",
+    "Sabe interpretar alarme comum.",
+    "Sabe quando chamar instrutor.",
+    "Sabe quando chamar manutenção.",
+    "Não tenta intervir com máquina em movimento.",
+  ],
+};
+
+export function getChecklistPartidaItems(trilhaId: string) {
+  return CHECKLIST_PARTIDA_ITEMS_BY_TRILHA[trilhaId] ?? CHECKLIST_PARTIDA_ITEMS_DEFAULT;
+}
+
+export function getAvaliacaoPraticaItems(maquinaId?: string) {
+  return maquinaId
+    ? (AVALIACAO_PRATICA_ITEMS_BY_MAQUINA[maquinaId] ?? AVALIACAO_PRATICA_ITEMS_DEFAULT)
+    : AVALIACAO_PRATICA_ITEMS_DEFAULT;
+}
 
 export type EtapaStatusLocal = "pendente" | "concluida";
 
@@ -94,7 +135,7 @@ export function toggleChecklistPartida(trilhaId: string, item: string) {
   const current = all[trilhaId] ?? {};
   all[trilhaId] = { ...current, [item]: !current[item] };
   writeJson(CHECKLIST_KEY, all);
-  const done = CHECKLIST_PARTIDA_ITEMS.every((i) => all[trilhaId][i]);
+  const done = getChecklistPartidaItems(trilhaId).every((i) => all[trilhaId][i]);
   const progress = getTrilhaProgress(trilhaId);
   saveTrilhaProgress(trilhaId, {
     ...progress,
@@ -115,8 +156,8 @@ export function toggleAvaliacaoPratica(funcionarioId: string, item: string) {
   return all[funcionarioId];
 }
 
-export function isAvaliacaoPraticaAprovada(items: Record<string, boolean>) {
-  return AVALIACAO_PRATICA_ITEMS.every((item) => items[item]);
+export function isAvaliacaoPraticaAprovada(items: Record<string, boolean>, maquinaId?: string) {
+  return getAvaliacaoPraticaItems(maquinaId).every((item) => items[item]);
 }
 
 export function areEtapasTeoricasConcluidas(etapas: TrilhaEtapa[], progress: TrilhaProgressLocal) {
