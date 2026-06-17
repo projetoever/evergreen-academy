@@ -84,7 +84,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "Formação operacional Evergreen: conceitos básicos, processos e treinamento por máquina.",
+          "Plataforma mobile de formação operacional para máquinas, trilhas, checklists, avaliações e matriz de competência.",
       },
       { name: "theme-color", content: "#0B3D2E" },
       { name: "apple-mobile-web-app-capable", content: "yes" },
@@ -95,25 +95,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         property: "og:description",
         content:
-          "Formação operacional Evergreen: conceitos básicos, processos e treinamento por máquina.",
+          "Plataforma mobile de formação operacional para máquinas, trilhas, checklists, avaliações e matriz de competência.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:site_name", content: "Evergreen Academy" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:title", content: "Evergreen Academy" },
       {
-        name: "description",
-        content:
-          "Evergreen Academy Learn is a mobile-first PWA for industrial operations training.",
-      },
-      {
-        property: "og:description",
-        content:
-          "Evergreen Academy Learn is a mobile-first PWA for industrial operations training.",
-      },
-      {
         name: "twitter:description",
         content:
-          "Evergreen Academy Learn is a mobile-first PWA for industrial operations training.",
+          "Plataforma mobile de formação operacional para máquinas, trilhas, checklists, avaliações e matriz de competência.",
       },
       {
         property: "og:image",
