@@ -294,36 +294,345 @@ export const MAQUINAS_MOCK: Maquina[] = [
     qrCode: "MQ-002",
     statusTreinamento: "disponivel",
     operadoresHabilitados: 5,
-    modulos: ["Núcleo", "Cover top", "Selagem", "Envelope individual", "Embalagem"],
+    descricaoOperacional:
+      "Linha destinada à fabricação de absorventes higiênicos, com alimentação de materiais em bobina, formação do núcleo absorvente, aplicação de cobertura superior, filme inferior, adesivo, corte, dobra, inspeção e embalagem.",
+    objetivoTreinamento:
+      "Preparar o operador iniciante para reconhecer o caminho dos materiais, acompanhar parâmetros básicos, executar checklist de partida assistido, identificar defeitos comuns em absorventes e comunicar desvios sem intervir em partes móveis ou áreas técnicas sem autorização.",
+    materiaisEntrada: [
+      "Cobertura superior não tecido",
+      "Filme inferior PE",
+      "Núcleo absorvente / celulose",
+      "SAP quando aplicável",
+      "Papel release",
+      "Adesivo hotmelt",
+      "Embalagem individual",
+      "Fita ou invólucro",
+      "Materiais de embalagem final",
+    ],
+    produtoSaida: "Absorvente higiênico feminino embalado",
+    componentesPrincipais: [
+      "Desbobinadores",
+      "Unidade de formação do núcleo",
+      "Aplicação de cobertura superior",
+      "Aplicação de filme inferior",
+      "Aplicação de adesivo",
+      "Corte anatômico",
+      "Sistema de dobra",
+      "Embalagem individual",
+      "Inspeção por sensores",
+      "Esteira de saída",
+      "Embalagem final",
+    ],
+    parametrosBasicos: [
+      {
+        nome: "Velocidade da linha",
+        valorReferencia: "Definida por receita e liberada pelo instrutor",
+        cuidado: "Aumentar apenas quando corte, dobra e embalagem estiverem estáveis.",
+      },
+      {
+        nome: "Tensão de bobina",
+        valorReferencia: "Material tracionado sem rasgar, enrugar ou oscilar lateralmente",
+        cuidado: "Tensão incorreta pode enrugar cobertura e descentralizar o produto.",
+      },
+      {
+        nome: "Temperatura do hotmelt",
+        valorReferencia: "Conforme adesivo e receita em uso",
+        cuidado: "Nunca tocar em tanque, mangueiras ou bicos; risco de queimadura grave.",
+      },
+      {
+        nome: "Pressão pneumática",
+        valorReferencia: "Faixa operacional indicada na IHM/manômetro da linha",
+        cuidado: "Queda de pressão afeta corte, dobra, atuadores e embalagem.",
+      },
+      {
+        nome: "Vácuo quando aplicável",
+        valorReferencia: "Suficiente para transportar e posicionar núcleo/material",
+        cuidado: "Perda de vácuo pode causar produto torto; verificar alarme e chamar apoio.",
+      },
+      {
+        nome: "Posição de corte",
+        valorReferencia: "Corte anatômico alinhado ao centro do absorvente",
+        cuidado: "Desvio repetitivo deve ser segregado e comunicado ao instrutor.",
+      },
+      {
+        nome: "Alinhamento de cobertura",
+        valorReferencia: "Cobertura centralizada, sem dobras e cobrindo o núcleo",
+        cuidado: "Não puxar material com a máquina em movimento.",
+      },
+      {
+        nome: "Sincronismo de embalagem",
+        valorReferencia: "Produto entra centralizado e sai com invólucro fechado",
+        cuidado: "Falha recorrente exige parada segura e apoio técnico.",
+      },
+      {
+        nome: "Quantidade por pacote",
+        valorReferencia: "Conforme ordem/receita de embalagem final",
+        cuidado: "Conferir contagem inicial e amostras durante o turno.",
+      },
+    ],
+    defeitosProduto: [
+      {
+        defeito: "Absorvente descentralizado",
+        possivelCausa: "Tensão de bobina, guia lateral, vácuo ou sincronismo instável.",
+        verificacaoInicial:
+          "Comparar amostras, observar alinhamento da cobertura/release e checar alarmes sem tocar em partes móveis.",
+        quandoChamarInstrutor: "Quando o desvio aparecer em sequência ou houver dúvida de padrão.",
+        quandoChamarManutencao: "Quando guia, sensor, vácuo ou atuador não estabilizar.",
+      },
+      {
+        defeito: "Corte irregular",
+        possivelCausa: "Posição de corte, lâmina, pressão ou sincronismo fora de referência.",
+        verificacaoInicial: "Segregar amostras e conferir receita/tela de alarmes.",
+        quandoChamarInstrutor: "Sempre que precisar decidir liberação ou descarte do produto.",
+        quandoChamarManutencao: "Se houver ruído, vibração ou falha persistente no corte.",
+      },
+      {
+        defeito: "Cobertura enrugada",
+        possivelCausa: "Tensão incorreta, bobina mal posicionada ou guia desalinhado.",
+        verificacaoInicial: "Observar passagem do material e conferir se a bobina oscila.",
+        quandoChamarInstrutor: "Quando for necessário refazer passagem de material em treinamento.",
+        quandoChamarManutencao: "Se guias, roletes ou desbobinador apresentarem falha.",
+      },
+      {
+        defeito: "Excesso de cola",
+        possivelCausa: "Temperatura, pressão ou bico de hotmelt fora de condição.",
+        verificacaoInicial: "Observar padrão de cola no produto e status de temperatura na IHM.",
+        quandoChamarInstrutor: "Quando houver dúvida de qualidade ou segregação.",
+        quandoChamarManutencao: "Se houver vazamento, gotejamento ou necessidade de limpar bico.",
+      },
+      {
+        defeito: "Falta de cola",
+        possivelCausa:
+          "Baixa temperatura, tanque baixo, mangueira/bico obstruído ou falha de bomba.",
+        verificacaoInicial: "Checar nível de cola e telas de temperatura/alarme.",
+        quandoChamarInstrutor: "Quando embalagem ou camadas abrirem na inspeção.",
+        quandoChamarManutencao: "Se o sistema de hotmelt precisar de intervenção técnica.",
+      },
+      {
+        defeito: "Embalagem individual aberta",
+        possivelCausa: "Sincronismo, selagem, cola ou tensão do invólucro fora de padrão.",
+        verificacaoInicial: "Separar produto aberto e conferir tela de embalagem.",
+        quandoChamarInstrutor: "Quando ocorrer repetição ou dúvida sobre descarte/reprocesso.",
+        quandoChamarManutencao: "Se selador, sensor ou transportador não estabilizar.",
+      },
+      {
+        defeito: "Produto dobrado incorretamente",
+        possivelCausa: "Guia de dobra desalinhado, velocidade alta ou produto descentralizado.",
+        verificacaoInicial: "Observar acúmulo na dobra e retirar somente produto parado/liberado.",
+        quandoChamarInstrutor: "Quando precisar confirmar ajuste operacional permitido.",
+        quandoChamarManutencao: "Se guias, correias ou atuadores estiverem danificados.",
+      },
+      {
+        defeito: "Falha de contagem",
+        possivelCausa: "Sensor sujo/desalinhado, produto sobreposto ou empilhamento irregular.",
+        verificacaoInicial: "Conferir quantidade por pacote e tela de diagnóstico de sensores.",
+        quandoChamarInstrutor: "Quando impactar embalagem final ou amostragem.",
+        quandoChamarManutencao: "Quando sensor ou esteira falhar repetidamente.",
+      },
+      {
+        defeito: "Contaminação visual",
+        possivelCausa:
+          "Sujeira na área, material contaminado, cola ou óleo em contato com produto.",
+        verificacaoInicial: "Parar em condição segura, segregar produto e comunicar liderança.",
+        quandoChamarInstrutor: "Sempre, para orientar segregação e registro.",
+        quandoChamarManutencao: "Se a fonte for vazamento ou componente da máquina.",
+      },
+      {
+        defeito: "Desalinhamento do release",
+        possivelCausa: "Bobina de release, guia lateral ou tensão fora de referência.",
+        verificacaoInicial: "Conferir visualmente o posicionamento sem acessar área em movimento.",
+        quandoChamarInstrutor: "Quando o desvio for leve mas repetitivo.",
+        quandoChamarManutencao: "Se guia automático, sensor ou rolete falhar.",
+      },
+    ],
+    pontosIHM: [
+      {
+        titulo: "Tela principal",
+        objetivo: "Acompanhar estado geral da linha, partida/parada e resumo de parâmetros.",
+        observacao: "Operador iniciante usa para consulta e comandos liberados pelo instrutor.",
+      },
+      {
+        titulo: "Tela de alarmes",
+        objetivo: "Identificar código, descrição, histórico e área afetada.",
+        observacao: "Alarme repetitivo deve ser comunicado; não resetar continuamente.",
+      },
+      {
+        titulo: "Tela de receitas",
+        objetivo: "Confirmar produto, quantidade por pacote e parâmetros carregados.",
+        observacao: "Troca de receita é atividade assistida.",
+      },
+      {
+        titulo: "Tela de velocidade",
+        objetivo: "Visualizar velocidade atual e meta operacional.",
+        observacao: "Não aumentar velocidade para compensar parada sem autorização.",
+      },
+      {
+        titulo: "Tela de temperatura da cola",
+        objetivo: "Monitorar tanque, mangueiras e bicos de hotmelt.",
+        observacao: "Ajustes técnicos e limpeza de bicos são restritos.",
+      },
+      {
+        titulo: "Tela de embalagem",
+        objetivo: "Acompanhar invólucro, sincronismo, selagem/fechamento e contagem.",
+        observacao: "Produto aberto ou contagem divergente exige segregação e aviso.",
+      },
+      {
+        titulo: "Diagnóstico de sensores",
+        objetivo: "Apoiar leitura de sensores de presença, contagem, embalagem e segurança.",
+        observacao: "Nunca burlar sensor, chave de segurança ou proteção.",
+      },
+    ],
+    perguntasFrequentes: [
+      {
+        pergunta: "O que verificar se o produto sair torto?",
+        resposta:
+          "Verifique amostras, alinhamento visual de cobertura/release, tensão aparente da bobina e alarmes. Não ajuste guias com a máquina em movimento; chame o instrutor se repetir.",
+      },
+      {
+        pergunta: "Quando chamar o instrutor?",
+        resposta:
+          "Na primeira partida, troca de material durante treinamento, dúvida de qualidade, defeito repetitivo ou necessidade de confirmar ajuste operacional permitido.",
+      },
+      {
+        pergunta: "Quando chamar manutenção?",
+        resposta:
+          "Quando houver falha mecânica, elétrica, pneumática, sensor defeituoso, alarme repetitivo, vazamento, ruído anormal ou necessidade de abrir proteção.",
+      },
+      {
+        pergunta: "O que fazer se a embalagem individual abrir?",
+        resposta:
+          "Segregue as amostras, confira tela de embalagem/temperatura, comunique o instrutor e aguarde orientação antes de retomar em velocidade normal.",
+      },
+      {
+        pergunta: "O que observar antes da primeira partida?",
+        resposta:
+          "EPI, proteções fechadas, área limpa, materiais corretos, pressão pneumática, hotmelt estabilizado, receita correta, sensores sem obstrução e ninguém em área de risco.",
+      },
+      {
+        pergunta: "O que nunca fazer com a máquina em movimento?",
+        resposta:
+          "Nunca colocar a mão em rolos, corte, dobra ou embalagem; nunca puxar material preso, retirar proteção, burlar sensor ou limpar hotmelt/roletes.",
+      },
+    ],
+    documentosRelacionados: [
+      "manual-haina-absorvente",
+      "checklist-partida-absorvente",
+      "ihm-embalagem-absorvente",
+      "troca-bobina-cobertura-absorvente",
+      "parada-segura-absorvente",
+      "defeitos-absorventes",
+      "liberacao-operador-absorvente",
+    ],
+    nivelComplexidade: "intermediario",
+    tempoEstimadoTreinamento: "5 a 7 horas de teoria e prática acompanhada",
+    modulos: [
+      "Alimentação de bobinas",
+      "Formação do núcleo",
+      "Cobertura e filme inferior",
+      "Adesivo e release",
+      "Corte anatômico e dobra",
+      "Embalagem individual",
+      "Inspeção e embalagem final",
+    ],
     checklist: [
       { id: "c1", texto: "Proteções fechadas" },
-      { id: "c2", texto: "Selador aquecido" },
-      { id: "c3", texto: "Bobina de cover top ok" },
+      { id: "c2", texto: "Pressão pneumática dentro da faixa indicada" },
+      { id: "c3", texto: "Bobinas de cobertura, filme e release carregadas" },
       { id: "c4", texto: "EPI completo" },
+      { id: "c5", texto: "Hotmelt estabilizado e área sem vazamento" },
+      { id: "c6", texto: "Tela de embalagem e contagem conferidas" },
     ],
     alarmes: [
-      { codigo: "B112", descricao: "Falha selagem", acao: "Verificar temperatura e pressão." },
-      { codigo: "B220", descricao: "Envelope desalinhado", acao: "Reajustar guia." },
+      {
+        codigo: "B112",
+        descricao: "Falha de fechamento da embalagem",
+        acao: "Conferir tela de embalagem e comunicar instrutor.",
+      },
+      {
+        codigo: "B220",
+        descricao: "Invólucro desalinhado",
+        acao: "Parar em condição segura e solicitar apoio para ajuste de guia.",
+      },
+      {
+        codigo: "B305",
+        descricao: "Temperatura hotmelt fora da faixa",
+        acao: "Aguardar estabilização e não tocar no sistema de cola.",
+      },
+      {
+        codigo: "B410",
+        descricao: "Sensor de contagem sem sinal",
+        acao: "Verificar diagnóstico na IHM e chamar manutenção se repetir.",
+      },
     ],
     pontosSeguranca: [
       {
-        titulo: "Selador térmico",
-        risco: "Superfície a 180°C.",
+        titulo: "Hotmelt e pontos quentes",
+        risco: "Tanque, mangueiras e bicos de cola podem causar queimadura grave.",
         epi: ["Luva térmica"],
-        procedimento: "Não tocar; aguardar resfriar.",
+        procedimento:
+          "Não tocar no sistema de cola; chamar instrutor/manutenção para vazamento ou alarme repetitivo.",
         nivel: "alto",
       },
       {
         titulo: "Partes móveis",
-        risco: "Correias e roletes em alta velocidade.",
+        risco: "Correias, rolos de tração e esteiras podem puxar mãos, cabelo ou uniforme.",
         epi: ["Cabelo preso", "Sem adornos"],
-        procedimento: "Manter proteções fechadas durante operação.",
+        procedimento:
+          "Manter proteções fechadas e nunca puxar material com a máquina em movimento.",
+        nivel: "alto",
+      },
+      {
+        titulo: "Pontos de corte",
+        risco: "Corte anatômico e facas podem causar ferimentos graves.",
+        epi: ["Luva anti-corte", "Óculos de segurança"],
+        procedimento:
+          "Limpeza, retirada de refugo e inspeção somente com parada segura e liberação.",
+        nivel: "alto",
+      },
+      {
+        titulo: "Área de embalagem",
+        risco: "Dobra, invólucro e contadores possuem roletes e movimentos sincronizados.",
+        epi: ["Óculos de segurança", "Cabelo preso"],
+        procedimento: "Não acessar a área para corrigir produto aberto; parar e chamar instrutor.",
+        nivel: "medio",
+      },
+      {
+        titulo: "Energia pneumática",
+        risco: "Atuadores podem movimentar mesmo em baixa velocidade ou durante reset.",
+        epi: ["Óculos de segurança"],
+        procedimento:
+          "Não despressurizar ou regular válvulas sem manutenção; comunicar alarme repetitivo.",
         nivel: "medio",
       },
     ],
     documentos: [
-      { id: "d1", titulo: "Manual técnico Haina Abs.", tipo: "manual" },
-      { id: "d2", titulo: "IHM — telas principais", tipo: "ihm" },
+      { id: "manual-haina-absorvente", titulo: "Manual rápido — Haina Absorvente", tipo: "manual" },
+      {
+        id: "checklist-partida-absorvente",
+        titulo: "Checklist de partida — Absorvente",
+        tipo: "checklist",
+      },
+      { id: "ihm-embalagem-absorvente", titulo: "Print IHM — Tela de embalagem", tipo: "ihm" },
+      {
+        id: "troca-bobina-cobertura-absorvente",
+        titulo: "Procedimento — Troca de bobina de cobertura",
+        tipo: "procedimento",
+      },
+      {
+        id: "parada-segura-absorvente",
+        titulo: "Procedimento — Parada segura da linha de absorvente",
+        tipo: "procedimento",
+      },
+      {
+        id: "defeitos-absorventes",
+        titulo: "Documento — Defeitos comuns em absorventes",
+        tipo: "pdf",
+      },
+      {
+        id: "liberacao-operador-absorvente",
+        titulo: "Checklist — Liberação de operador na linha de absorventes",
+        tipo: "checklist",
+      },
     ],
   },
   {

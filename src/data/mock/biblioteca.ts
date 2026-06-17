@@ -118,4 +118,68 @@ export const BIBLIOTECA_MOCK: ItemBiblioteca[] = [
     maquinaId: "mq-haina-fralda",
     status: "mock",
   },
+
+  {
+    id: "manual-haina-absorvente",
+    tipo: "manual",
+    titulo: "Manual rápido — Haina Absorvente",
+    descricao:
+      "Resumo operacional da linha de absorventes, fluxo dos materiais, comandos de consulta e cuidados mínimos por turno.",
+    maquinaId: "mq-haina-absorvente",
+    status: "mock",
+  },
+  {
+    id: "checklist-partida-absorvente",
+    tipo: "checklist",
+    titulo: "Checklist de partida — Absorvente",
+    descricao:
+      "Conferências mockadas antes da primeira partida: materiais, proteções, hotmelt, sensores, ar comprimido e embalagem.",
+    maquinaId: "mq-haina-absorvente",
+    status: "mock",
+  },
+  {
+    id: "ihm-embalagem-absorvente",
+    tipo: "ihm",
+    titulo: "Print IHM — Tela de embalagem",
+    descricao:
+      "Referência visual simulada para velocidade, sincronismo de invólucro, contagem e alarmes da embalagem individual.",
+    maquinaId: "mq-haina-absorvente",
+    status: "mock",
+  },
+  {
+    id: "troca-bobina-cobertura-absorvente",
+    tipo: "procedimento",
+    titulo: "Procedimento — Troca de bobina de cobertura",
+    descricao:
+      "Passo a passo demonstrativo para preparar troca de cobertura superior com linha parada e apoio do instrutor.",
+    maquinaId: "mq-haina-absorvente",
+    status: "mock",
+  },
+  {
+    id: "parada-segura-absorvente",
+    tipo: "procedimento",
+    titulo: "Procedimento — Parada segura da linha de absorvente",
+    descricao:
+      "Orientação mockada para parada segura, comunicação de alarme repetitivo, segregação de produto e liberação de área.",
+    maquinaId: "mq-haina-absorvente",
+    status: "mock",
+  },
+  {
+    id: "defeitos-absorventes",
+    tipo: "pdf",
+    titulo: "Documento — Defeitos comuns em absorventes",
+    descricao:
+      "Guia visual simulado com causas prováveis de corte irregular, cobertura enrugada, cola fora do padrão e embalagem aberta.",
+    maquinaId: "mq-haina-absorvente",
+    status: "mock",
+  },
+  {
+    id: "liberacao-operador-absorvente",
+    tipo: "checklist",
+    titulo: "Checklist — Liberação de operador na linha de absorventes",
+    descricao:
+      "Modelo de validação final para operador iniciante, com observação assistida e critérios de comunicação segura.",
+    maquinaId: "mq-haina-absorvente",
+    status: "mock",
+  },
 ];
