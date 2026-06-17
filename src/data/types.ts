@@ -66,6 +66,31 @@ export interface DocumentoTecnico {
   tipo: "pdf" | "manual" | "ihm" | "foto" | "video" | "procedimento" | "checklist";
 }
 
+export interface ParametroBasico {
+  nome: string;
+  valorReferencia: string;
+  cuidado: string;
+}
+
+export interface DefeitoProduto {
+  defeito: string;
+  possivelCausa: string;
+  verificacaoInicial: string;
+  quandoChamarInstrutor: string;
+  quandoChamarManutencao: string;
+}
+
+export interface PontoIHM {
+  titulo: string;
+  objetivo: string;
+  observacao: string;
+}
+
+export interface PerguntaFrequente {
+  pergunta: string;
+  resposta: string;
+}
+
 export interface Maquina {
   id: string;
   nome: string;
@@ -76,6 +101,18 @@ export interface Maquina {
   qrCode: string; // ex: "MQ-001"
   statusTreinamento: "disponivel" | "em-desenvolvimento" | "indisponivel";
   operadoresHabilitados: number;
+  descricaoOperacional?: string;
+  objetivoTreinamento?: string;
+  materiaisEntrada?: string[];
+  produtoSaida?: string;
+  componentesPrincipais?: string[];
+  parametrosBasicos?: ParametroBasico[];
+  defeitosProduto?: DefeitoProduto[];
+  pontosIHM?: PontoIHM[];
+  perguntasFrequentes?: PerguntaFrequente[];
+  documentosRelacionados?: string[];
+  nivelComplexidade?: Nivel;
+  tempoEstimadoTreinamento?: string;
   modulos: string[];
   checklist: ItemChecklist[];
   alarmes: Alarme[];

@@ -1,4 +1,4 @@
-import { createFileRoute, notFound } from "@tanstack/react-router";
+import { Link, createFileRoute, notFound } from "@tanstack/react-router";
 import { useState } from "react";
 import {
   AlertTriangle,
@@ -52,6 +52,17 @@ const tipoLabel: Record<TrilhaEtapa["tipo"], string> = {
   quiz: "Quiz",
   pratica: "Prática",
   liberacao: "Liberação",
+};
+
+const linksSecoesHaina: Record<string, Array<{ label: string; tab: string }>> = {
+  "haina-fralda-baby": [
+    { label: "Ver componentes da máquina", tab: "componentes" },
+    { label: "Ver parâmetros básicos", tab: "parametros" },
+  ],
+  "alarmes-comuns": [{ label: "Ver alarmes", tab: "alarmes" }],
+  seguranca: [{ label: "Ver pontos de segurança", tab: "seguranca" }],
+  "checklist-partida": [{ label: "Ver checklist da máquina", tab: "checklist" }],
+  "processo-fraldas": [{ label: "Ver defeitos comuns", tab: "defeitos" }],
 };
 
 function TrilhaPage() {
@@ -145,6 +156,26 @@ function TrilhaPage() {
                   <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
                     {etapa.descricao}
                   </p>
+                  {maquina && linksSecoesHaina[etapa.id] && (
+                    <div className="mt-3 grid gap-2">
+                      {linksSecoesHaina[etapa.id].map((link) => (
+                        <Button
+                          key={link.tab}
+                          asChild
+                          variant="outline"
+                          className="h-10 rounded-xl text-xs font-bold"
+                        >
+                          <Link
+                            to="/maquinas/$maquinaId"
+                            params={{ maquinaId: maquina.id }}
+                            hash={link.tab}
+                          >
+                            {link.label}
+                          </Link>
+                        </Button>
+                      ))}
+                    </div>
+                  )}
                   {etapa.tipo === "checklist" ? (
                     <ChecklistPartida
                       trilhaId={trilha.id}
