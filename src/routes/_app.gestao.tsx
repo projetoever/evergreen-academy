@@ -71,11 +71,13 @@ function GestaoPage() {
               BIBLIOTECA_MOCK.filter((d) => d.maquinaId === m.id).length || m.documentos.length;
             const checklists = m.checklist.length;
             const statusConteudo =
-              m.id === "mq-haina-fralda"
-                ? "pendente revisão"
-                : m.statusTreinamento === "disponivel"
-                  ? "mockado"
-                  : "mockado";
+              m.id === "mq-haina-absorvente"
+                ? "técnico disponível · trilha pendente"
+                : m.id === "mq-haina-fralda"
+                  ? "pendente revisão"
+                  : m.statusTreinamento === "disponivel"
+                    ? "mockado"
+                    : "mockado";
             return (
               <article key={m.id} className="rounded-xl border border-border bg-background p-3">
                 <div className="flex items-center justify-between gap-2">

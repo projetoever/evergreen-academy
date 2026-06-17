@@ -170,6 +170,17 @@ function MaquinaDetalhe() {
 
         <TabsContent value="treino" className="mt-3 space-y-3 px-4">
           <Section title="Módulos" items={maquina.modulos} numbered />
+          {maquina.id === "mq-haina-absorvente" && (
+            <div className="rounded-2xl border border-dashed border-primary/40 bg-primary/5 p-4">
+              <p className="text-sm font-extrabold text-primary">
+                Conteúdo técnico disponível, trilha pendente
+              </p>
+              <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+                Trilha de absorventes em breve. Use as abas técnicas, checklist, alarmes, segurança
+                e documentos como base operacional mockada até a liberação da trilha.
+              </p>
+            </div>
+          )}
           {maquina.perguntasFrequentes?.map((f) => (
             <InfoCard key={f.pergunta} title={f.pergunta} icon={<HelpCircle className="h-4 w-4" />}>
               {f.resposta}
