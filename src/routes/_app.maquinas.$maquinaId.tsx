@@ -1,4 +1,4 @@
-import { createFileRoute, notFound } from "@tanstack/react-router";
+import { Link, createFileRoute, notFound } from "@tanstack/react-router";
 import { MAQUINAS_MOCK } from "@/data/mock/maquinas";
 import { PageHeader } from "@/components/common/PageHeader";
 import { SafetyCallout } from "@/components/common/SafetyCallout";
@@ -171,14 +171,22 @@ function MaquinaDetalhe() {
         <TabsContent value="treino" className="mt-3 space-y-3 px-4">
           <Section title="Módulos" items={maquina.modulos} numbered />
           {maquina.id === "mq-haina-absorvente" && (
-            <div className="rounded-2xl border border-dashed border-primary/40 bg-primary/5 p-4">
+            <div className="rounded-2xl border border-primary/30 bg-primary/5 p-4">
               <p className="text-sm font-extrabold text-primary">
-                Conteúdo técnico disponível, trilha pendente
+                Trilha disponível — Operador Inicial Haina Absorvente
               </p>
               <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
-                Trilha de absorventes em breve. Use as abas técnicas, checklist, alarmes, segurança
-                e documentos como base operacional mockada até a liberação da trilha.
+                Acesse a trilha mockada com teoria, checklist interativo, quiz com aprovação mínima
+                de 80% e avaliação prática do instrutor.
               </p>
+              <Button asChild className="mt-3 h-10 w-full rounded-xl text-xs font-bold">
+                <Link
+                  to="/trilhas/$trilhaId"
+                  params={{ trilhaId: "operador-inicial-haina-absorvente" }}
+                >
+                  Abrir trilha da Haina Absorvente
+                </Link>
+              </Button>
             </div>
           )}
           {maquina.perguntasFrequentes?.map((f) => (
